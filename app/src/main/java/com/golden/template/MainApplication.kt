@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import androidx.appcompat.app.AppCompatDelegate
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate
 import com.golden.template.util.LIFECYCLE
 import com.golden.template.util.PreferencesUtil
@@ -26,10 +26,11 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
         super.onCreate()
         Log.d(LIFECYCLE, "app onCreate")
         registerActivityLifecycleCallbacks(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        Log.d(LIFECYCLE, "${activity.javaClass.name} onCreated")
+        Log.d(LIFECYCLE, "${activity.javaClass.simpleName} onCreated")
         if (!activitiesAlive.contains(activity.javaClass.name)){
             activitiesAlive.add(activity.javaClass.name)
             Log.d(LIFECYCLE, activitiesAlive.toString())
@@ -51,7 +52,7 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
     }
 
     override fun onActivityStopped(activity: Activity) {
-        Log.d(LIFECYCLE, "${activity.javaClass.name} onStopped")
+//        Log.d(LIFECYCLE, "${activity.javaClass.name} onStopped")
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, savedInstanceState: Bundle) {
@@ -59,8 +60,9 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        Log.d(LIFECYCLE, "${activity.javaClass.name} onDestroyed")
+        Log.d(LIFECYCLE, "${activity.javaClass.simpleName} onDestroyed")
         activitiesAlive.remove(activity.javaClass.name)
+        Log.d(LIFECYCLE, activitiesAlive.toString())
     }
 
     override fun attachBaseContext(base: Context) {

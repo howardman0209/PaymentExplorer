@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">HelloWorld</string>
+    <string name="app_name" translatable="false">Hello World</string>
 
     <!--    common-->
     <string name="label_login">Login</string>
@@ -98,6 +98,7 @@
     <string name="label_rationale_camera">"Allow camera permission to take picture, barcode or QR code"</string>
     <string name="label_rationale_file">"Allow files and media permission to save images to your device"</string>
     <string name="label_rationale_file_read">"Allow read files and media permission to read images from your device"</string>
+    <string name="label_rationale_file_manage">"Allow manage files and media permission from device's external storage"</string>
     <string name="label_rationale_stats">"Allow permission to perform transaction"</string>
     <string name="label_rationale_notification">"Allow device notification permission to push notification to your device"</string>
 
@@ -721,4 +722,7 @@
     <string name="label_account_credit" translatable="false">"Credit card"</string>
     <string name="label_account_current" translatable="false">"Checking"</string>
     <string name="label_account_saving" translatable="false">"Saving"</string>
+
+    <string name="label_save_to_file" translatable="false">Save to file</string>
+    <string name="label_load_from_file" translatable="false">Load from file</string>
 </resources>

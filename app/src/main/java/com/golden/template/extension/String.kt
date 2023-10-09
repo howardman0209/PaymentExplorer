@@ -1,137 +1,17 @@
 package com.golden.template.extension
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.util.Base64
-import android.util.Patterns
-import com.golden.template.util.*
+import android.text.Editable
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
-import java.math.BigDecimal
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
-/**
- * Convert to ISOAmountString
- * @param exponent exponent
- * example: "3.52".toISOAmountString(2) -> "352"
- */
-fun String.toISOAmountString(exponent: Int): String = this.toBigDecimal().movePointRight(exponent).toBigInteger().toString()
-
-/**
- * Convert from ISOAmountString to BigDecimal
- * @param exponent exponent
- * example: "352".toBigDecimalFromISOAmountString(2) -> 3.52
- */
-fun String.toBigDecimalFromISOAmountString(exponent: Int): BigDecimal = this.toBigDecimal().movePointLeft(exponent)
-fun String.simplifiedCurrencySymbol(): String {
-    val pattern: Pattern = Pattern.compile("[A-Z]")
-    val matcher: Matcher = pattern.matcher(this)
-    return matcher.replaceAll("")
-}
-
-fun String.toCurrencyDecimal(): Int {
-    return Currency.getInstance(this).defaultFractionDigits
-}
-
-fun String.toMaskedAccount(): String {
-    return this.takeLast(4).padStart(this.length, '*')
-}
-
-fun String.toTimestampOrNull(): Long? {
-    val dateFormat = SimpleDateFormat(DATE_TIME_PATTERN_UTC, Locale.ENGLISH)
-    return try {
-        dateFormat.parse(this)?.time?.div(1000)
-    } catch (e: Exception) {
-        null
-    }
-}
-
-fun String.toLocalTime(pattern: String? = DATE_TIME_DISPLAY_PATTERN_SHORT): String? {
-    return try {
-        val dateFormat = SimpleDateFormat(DATE_TIME_DISPLAY_PATTERN_FULL, Locale.ENGLISH)
-        dateFormat.timeZone = TimeZone.getTimeZone(timeZone_HK)
-        val date = dateFormat.parse(this)
-        SimpleDateFormat(pattern, Locale.ENGLISH).apply {
-            timeZone = Calendar.getInstance().timeZone
-        }.format(date!!)
-
-    } catch (ex: ParseException) {
-        null
-    }
-}
-
-@Suppress("unused")
-fun String.base64StringToBitmap(): Bitmap? {
-    val pureBase64String = this.split(",").last() //remove "data:image/jpg;base64," in the front
-    val decode: ByteArray = Base64.decode(pureBase64String, Base64.DEFAULT)
-    return BitmapFactory.decodeByteArray(decode, 0, decode.size)
-}
-
-/**
- * Email pattern checking
- */
-fun String.isEmailValid(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this).matches()
-
-/**
- * @return error res if username not valid; or null if valid
- */
-fun String?.usernameError(): String? = if (!isNullOrBlank())
-    null
-else
-    "Invalid username"
-
-fun String.toDateFormat(inputFormat: String, displayFormat: String): String {
-    val format = SimpleDateFormat(inputFormat, Locale.ENGLISH)
-    val sdfDisplayFormat = SimpleDateFormat(displayFormat, Locale.ENGLISH)
-    return try {
-        val date = format.parse(this)
-        if (date == null)
-            this
-        else
-            sdfDisplayFormat.format(date)
-    } catch (e: ParseException) {
-        this
-    }
-}
-
-fun String.utcToLocalTime(pattern: String? = DATE_TIME_DISPLAY_PATTERN_SHORT): String? {
-    return try {
-        val utcFormat = SimpleDateFormat(DATE_TIME_PATTERN_UTC_DEFAULT, Locale.ENGLISH)
-        utcFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val date = utcFormat.parse(this)
-        SimpleDateFormat(pattern, Locale.ENGLISH).apply {
-            timeZone = Calendar.getInstance().timeZone
-        }.format(date!!)
-
-    } catch (ex: ParseException) {
-        null
-    }
-}
-
-fun String.toServerBase64String(): String {
-    return "data:image/jpeg;base64,$this"
-}
-
-/**
- * Truncate string if too long and ended with ellipsis (…)
- */
-fun String.truncateAndEllipsis(maxLength: Int = 15): String {
-    return trim().run {
-        if (length <= maxLength) this else "${take(maxLength)}…"
-    }
-}
-
-@Suppress("unused")
-fun Char.isAlphaNumeric(): Boolean {
-    val regex = Regex("[a-zA-Z0-9]+?")
-    return regex.matches(this.toString())
-}
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import com.google.zxing.qrcode.encoder.Encoder
+import com.google.zxing.qrcode.encoder.QRCode
+import java.util.EnumMap
 
 fun String.insert(insert: String, index: Int): String {
     val start = substring(0, index)
@@ -149,66 +29,54 @@ fun String.hexToByteArray(): ByteArray {
 
 }
 
-fun String.rotate(n: Int) = drop(n % length) + take(n % length)
-
-fun String.decodeHex(): String {
-    require(length % 2 == 0) { "Must have an even length" }
+fun String.hexToAscii(): String {
+    require(length % 2 == 0) { "Input data have an even length" }
     return chunked(2)
         .map { it.toInt(16).toByte() }
         .toByteArray()
         .toString(Charsets.ISO_8859_1)  // Or whichever encoding your input uses
 }
 
-fun String.asciiToHex(): String {
+fun String.asciiToHex(separator: String = " "): String {
     val output = StringBuilder("")
-
-    for (c: Char in this)
-        output.append(c.toInt().toString(16))
-
+    this.forEach {
+        output.append(it.code.toString(16))
+        output.append(separator)
+    }
     return output.toString()
 }
 
-/**
- * Convert ISO8601 Date time string into A pair of Date String (MMdd) and Time String (HHmmss)
- */
-fun String.toISO8601To8583DateTime(): Pair<String, String> {
-    val fmt = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH)
-    val txnTime = fmt.parse(this)
-    val timeOut = SimpleDateFormat("HHmmss", Locale.ENGLISH)
-    val dateOut = SimpleDateFormat("MMdd", Locale.ENGLISH)
+fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
-    return Pair(
-        dateOut.format(txnTime),
-        timeOut.format(txnTime)
-    )
+inline fun <reified T> String.toDataClass(): T {
+    return Gson().fromJson(this, T::class.java)
 }
 
-fun String.convertToArray(): List<String> {
-    return this.substring(1, this.lastIndex).split(", ")
+fun String.toSerializedMap(): Map<String, Any> {
+    return this.toDataClass<JsonObject>().toMap()
 }
 
-fun String.qrStringToBitmap(): Bitmap? {
-    val result: BitMatrix = try {
-        MultiFormatWriter().encode(this, BarcodeFormat.QR_CODE, 300, 300, null)
+fun String.qrcodeDataToBitMatrix(margin: Int? = null, ecLevel: ErrorCorrectionLevel? = null, maskPattern: Int? = null, unitWidth: Int? = null): BitMatrix? {
+    val hints: MutableMap<EncodeHintType, Any> = EnumMap(EncodeHintType::class.java)
+    margin?.also { hints[EncodeHintType.MARGIN] = 0 /* default = 4 */ }
+    maskPattern?.also { if (QRCode.isValidMaskPattern(maskPattern)) hints[EncodeHintType.QR_MASK_PATTERN] = maskPattern }
+    ecLevel?.also { hints[EncodeHintType.ERROR_CORRECTION] = ecLevel }
+
+    // pre encode data to a qr code to get qr version
+    val qrCodeVersion = Encoder.encode(this, ecLevel, hints).version
+    hints[EncodeHintType.QR_VERSION] = qrCodeVersion.versionNumber
+    val qrDimension = unitWidth?.let {
+        qrCodeVersion.dimensionForVersion * unitWidth
+    } ?: 300
+
+    return try {
+        MultiFormatWriter().encode(this, BarcodeFormat.QR_CODE, qrDimension, qrDimension, hints)
     } catch (iae: IllegalArgumentException) {
         // Unsupported format
-        return null
+        null
     }
-    val w = result.width
-    val h = result.height
-    val pixels = IntArray(w * h)
-    for (y in 0 until h) {
-        val offset = y * w
-        for (x in 0 until w) {
-            pixels[offset + x] = if (result[x, y]) Color.BLACK else Color.WHITE
-        }
-    }
-    val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-    bitmap.setPixels(pixels, 0, 300, 0, 0, w, h)
-    return bitmap
 }
 
-fun String.hexToBinary(bit: Int = 8): String {
-    val binary = this.toInt(16).toString(2).uppercase()
-    return ("${"0".repeat(bit)}$binary").substring(binary.length)
+fun String.qrcodeDataToBitmap(): Bitmap? {
+    return this.qrcodeDataToBitMatrix()?.toBitmap()
 }

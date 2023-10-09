@@ -13,6 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -22,13 +23,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.golden.template.R
+import com.golden.template.databinding.DialogContentEditConfigJsonBinding
 import com.golden.template.databinding.DialogContentSingleInputBinding
+import com.golden.template.extension.flatten
+import com.golden.template.extension.hideKeyboard
+import com.golden.template.extension.requireManageFilePermission
+import com.golden.template.extension.toSerializedMap
 import com.golden.template.model.PermissionRequest
+import com.golden.template.model.PermissionRequestHandler
 import com.golden.template.model.PermissionResult
+import com.golden.template.ui.view.viewAdapter.ConfigItemsAdapter
 import com.golden.template.uiComponent.ProgressDialog
+import com.golden.template.util.JsonUtil
+import com.golden.template.util.ShareFileUtil
 import com.golden.template.util.TAG
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import io.reactivex.disposables.Disposable
 
 
@@ -36,21 +47,19 @@ abstract class BaseActivity : LocalizationActivity() {
     private val permCallbackMap = mutableMapOf<Int, PermissionResult.() -> Unit>()
     lateinit var progressDialog: AlertDialog
     private var disposable: Disposable? = null
+    var permissionRequestHandler: PermissionRequestHandler? = null
+    val permissionRequestLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        Log.d("permissionRequestLauncher", "result: $result")
+        permissionRequestHandler?.onPermissionRequestedResult(result.resultCode)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        Log.d(LIFECYCLE, "BaseActivity onCreate")
-
         setMainLayout()
         layoutInflater.inflate(R.layout.activity_base, findViewById(android.R.id.content))
-
         progressDialog = ProgressDialog(this).create()
-
-
-//        viewModel.isShowLoading.observe(this) {
-//            showLoadingIndicator(it == true)
-//        }
-
     }
 
     open fun setMainLayout() {
@@ -260,7 +269,7 @@ abstract class BaseActivity : LocalizationActivity() {
         }
     }
 
-    fun singleInputDialog(context: Context, title: String?, fieldName: String, fieldValue: String?, onConfirmCallBack: (editText: String) -> Unit) {
+    fun singleInputDialog(context: Context, title: String?, fieldName: String, fieldValue: String? = null, onConfirmCallBack: (editText: String) -> Unit) {
         val dialogBinding: DialogContentSingleInputBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_content_single_input, null, false)
         dialogBinding.tiInputBox1.hint = fieldName
         dialogBinding.tiInputBox1.editText?.setText(fieldValue)
@@ -272,11 +281,91 @@ abstract class BaseActivity : LocalizationActivity() {
             .setPositiveButton(R.string.button_confirm) { _, _ ->
                 onConfirmCallBack(dialogBinding.tiInputBox1.editText?.text.toString())
                 Log.d(TAG, "confirm")
+                context.hideKeyboard(dialogBinding.root)
             }
             .setNegativeButton(R.string.button_cancel) { _, _ ->
                 Log.d(TAG, "cancel")
+                context.hideKeyboard(dialogBinding.root)
             }
             .show()
     }
 
+    inline fun <reified T : Any> editConfigJson(
+        context: Context, view: View,
+        config: T,
+        editable: Boolean = true,
+        neutralBtn: String? = null,
+        enableSaveLoadButton: Boolean = true,
+        noinline onNeutralBtnClick: (() -> Unit)? = null,
+        crossinline onConfirmClick: (editResult: T) -> Unit
+    ) {
+        val dialogBinding: DialogContentEditConfigJsonBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_content_edit_config_json, null, false)
+
+        val map = config.toSerializedMap()
+        val list = map.flatten().toMutableList()
+        /// Do NOT sort the list otherwise cannot unflatten back to Json !!!
+
+        val adapter = ConfigItemsAdapter { position, adapter ->
+            if (editable) {
+                val keyAndValue = list[position].split(':', limit = 2)
+                singleInputDialog(context, getString(R.string.label_edit_item), keyAndValue.first(), keyAndValue.last()) { editedStr ->
+                    list[position] = "${keyAndValue.first()}:$editedStr"
+                    adapter.setData(list)
+                }
+            }
+        }
+        dialogBinding.rvConfigItems.adapter = adapter
+        adapter.setData(list)
+
+        if (!enableSaveLoadButton) {
+            dialogBinding.appBarLayout.visibility = View.GONE
+        }
+
+        dialogBinding.saveBtn.setOnClickListener {
+            requireManageFilePermission(it) {
+                singleInputDialog(context, "Please input a file suffix", "Suffix") { suffix ->
+                    if (suffix.isNotEmpty()) {
+                        ShareFileUtil.saveConfigToJsonFile(context, config, suffix)
+                    }
+                }
+            }
+        }
+
+        dialogBinding.loadBtn.setOnClickListener {
+            requireManageFilePermission(it) {
+                ShareFileUtil.loadConfigFromJsonFile(context, config) { jsonStr ->
+                    Log.d(TAG, "jsonStr: $jsonStr")
+                    list.clear()
+                    list.addAll(JsonUtil.flattenJson(jsonStr))
+                    adapter.setData(list)
+                }
+            }
+        }
+
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.label_edit_item)
+            .setCancelable(false)
+            .setView(dialogBinding.root)
+            .setPositiveButton(R.string.button_confirm) { _, _ ->
+                Log.d(TAG, "confirm")
+                val editedJsonStr = JsonUtil.unflattenJson(list)
+                try {
+                    onConfirmClick.invoke(Gson().fromJson(editedJsonStr, T::class.java))
+                } catch (e: Exception) {
+                    Log.d(TAG, "Exception: $e")
+                    Snackbar.make(view, "Invalid format", Snackbar.LENGTH_LONG).show()
+                }
+            }
+            .setNegativeButton(R.string.button_cancel) { _, _ ->
+                Log.d(TAG, "cancel")
+            }.apply {
+                onNeutralBtnClick?.let {
+                    setNeutralButton(neutralBtn) { _, _ ->
+                        Log.d(TAG, "reset")
+                        onNeutralBtnClick.invoke()
+                    }
+                }
+            }
+            .show()
+    }
 }

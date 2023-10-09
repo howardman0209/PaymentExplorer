@@ -1,5 +1,15 @@
 package com.golden.template.util
 
+const val REQUEST_CODE_ALL_PERMISSION = 1001
+const val REQUEST_CODE_CAMERA = 1002
+const val REQUEST_CODE_BLUETOOTH = 1003
+const val REQUEST_CODE_LOCATION = 1004
+const val REQUEST_CODE_FILE = 1005
+const val REQUEST_CODE_READ_FILE = 1006
+const val REQUEST_CODE_NOTIFICATION = 1007
+const val REQUEST_CODE_PHONE_STATE = 1008
+const val REQUEST_CODE_QR_CODE_ACTIVITY = 0x10
+
 //date time display
 const val MONTH_DATE_DISPLAY_PATTERN = "MMM dd"
 const val MONTH_YEAR_DISPLAY_PATTERN = "MMM yyyy"
