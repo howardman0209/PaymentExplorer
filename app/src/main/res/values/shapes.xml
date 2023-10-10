@@ -18,28 +18,28 @@
     <!--cornerFamilyBottomRight and cornerSizeTopRight, cornerSizeTopLeft, cornerSizeBottomLeft -->
     <!--and cornerSizeBottomRight.-->
 
-    <style name="ShapeAppearance.Golden.Template.Small.Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="ShapeAppearance.hello.world.Small.Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/round_corner_default</item>
     </style>
 
-    <style name="ShapeAppearance.Golden.Template.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <style name="ShapeAppearance.hello.world.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerRadius">@dimen/round_corner_double</item>
     </style>
 
-    <style name="ShapeAppearance.Golden.Template.Small.Circle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="ShapeAppearance.hello.world.Small.Circle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="ShapeAppearance.Golden.Template.Small.LeftRounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="ShapeAppearance.hello.world.Small.LeftRounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSize">@dimen/round_corner_default</item>
     </style>
 
-    <style name="ShapeAppearance.Golden.Template.Small.RightRound" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="ShapeAppearance.hello.world.Small.RightRound" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeTopLeft">0dp</item>

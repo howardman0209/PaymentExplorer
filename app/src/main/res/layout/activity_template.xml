@@ -7,12 +7,12 @@
 
         <variable
             name="view"
-            type="com.golden.template.ui.view.activity.TemplateActivity"
+            type="com.hello.world.ui.view.activity.TemplateActivity"
             />
 
         <variable
             name="viewModel"
-            type="com.golden.template.ui.viewModel.TemplateViewModel"
+            type="com.hello.world.ui.viewModel.TemplateViewModel"
             />
     </data>
     <androidx.core.widget.NestedScrollView
@@ -176,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Secondary button"
-                style="@style/Widget.Golden.Template.Button.Flat.Secondary"
+                style="@style/Widget.hello.world.Button.Flat.Secondary"
                 />
 
             <com.google.android.material.button.MaterialButton
@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Tertiary button"
-                style="@style/Widget.Golden.Template.Button.Flat.Tertiary"
+                style="@style/Widget.hello.world.Button.Flat.Tertiary"
                 />
 
             <com.google.android.material.button.MaterialButton
@@ -192,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Error button"
-                style="@style/Widget.Golden.Template.Button.Flat.Error"
+                style="@style/Widget.hello.world.Button.Flat.Error"
                 />
 
             <TextView
@@ -209,7 +209,7 @@
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Quick launch actions"
                 app:icon="@drawable/ic_tran_payment"
-                style="@style/Widget.Golden.Template.Button.Flat.QuickLaunch"
+                style="@style/Widget.hello.world.Button.Flat.QuickLaunch"
                 />
 
             <TextView
@@ -225,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Primary button"
-                style="@style/Widget.Golden.Template.Button.TextButton"
+                style="@style/Widget.hello.world.Button.TextButton"
                 />
 
             <com.google.android.material.button.MaterialButton
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Secondary button"
-                style="@style/Widget.Golden.Template.Button.TextButton.Secondary"
+                style="@style/Widget.hello.world.Button.TextButton.Secondary"
                 />
 
             <com.google.android.material.button.MaterialButton
@@ -241,7 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_default"
                 android:text="Tertiary button"
-                style="@style/Widget.Golden.Template.Button.TextButton.Tertiary"
+                style="@style/Widget.hello.world.Button.TextButton.Tertiary"
                 />
 
             <TextView

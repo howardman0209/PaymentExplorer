@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.golden.template"
+        applicationId "com.hello.world"
         minSdk 25
         targetSdk 33
         versionCode 1

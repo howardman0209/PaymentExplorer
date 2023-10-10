@@ -24,7 +24,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/saveBtn"
-                    style="@style/Widget.Golden.Template.Button.TextButton.Tertiary"
+                    style="@style/Widget.hello.world.Button.TextButton.Tertiary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -33,7 +33,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/loadBtn"
-                    style="@style/Widget.Golden.Template.Button.TextButton.Tertiary"
+                    style="@style/Widget.hello.world.Button.TextButton.Tertiary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -22,86 +22,86 @@
     <!--letterSpacing, etc. to define a custom appearance for each and see how they are -->
     <!--applied globally across your app.-->
 
-    <style name="TextAppearance.Golden.Template" parent="" />
+    <style name="TextAppearance.hello.world" parent="" />
 
-    <style name="TextAppearance.Golden.Template.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="TextAppearance.hello.world.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/inter_bold</item>
         <item name="android:letterSpacing">-0.0125</item>
         <item name="android:textSize">@dimen/font_size_h1</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+    <style name="TextAppearance.hello.world.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:letterSpacing">-0.0125</item>
         <item name="android:textSize">@dimen/font_size_h2</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="TextAppearance.hello.world.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="fontFamily">@font/inter_bold</item>
         <item name="android:letterSpacing">0</item>
         <item name="android:textSize">@dimen/font_size_h3</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+    <style name="TextAppearance.hello.world.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_h4</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextAppearance.hello.world.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_h5</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.hello.world.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_h6</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Subtitle1">
+    <style name="TextAppearance.hello.world.Subtitle1">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_l</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Subtitle2">
+    <style name="TextAppearance.hello.world.Subtitle2">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_m</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Body1">
+    <style name="TextAppearance.hello.world.Body1">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_l</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Body2">
+    <style name="TextAppearance.hello.world.Body2">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_m</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Caption">
+    <style name="TextAppearance.hello.world.Caption">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:letterSpacing">0.015</item>
         <item name="android:textSize">@dimen/font_size_body_s</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Terms">
+    <style name="TextAppearance.hello.world.Terms">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:letterSpacing">0.015</item>
         <item name="android:textSize">@dimen/font_size_body_xs</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Overline">
+    <style name="TextAppearance.hello.world.Overline">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_body_s</item>
         <item name="android:letterSpacing">0.125</item>
@@ -109,14 +109,14 @@
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.Button">
+    <style name="TextAppearance.hello.world.Button">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_body_l</item>
         <item name="android:letterSpacing">0.0075</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.Golden.Template.TextButton">
+    <style name="TextAppearance.hello.world.TextButton">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_body_m</item>
         <item name="android:letterSpacing">0.015</item>
