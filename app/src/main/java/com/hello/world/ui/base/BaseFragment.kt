@@ -75,23 +75,37 @@ abstract class BaseFragment : Fragment() {
         baseActivity.showLoadingIndicator(isShowLoading)
     }
 
-    fun singleInputDialog(context: Context, title: String?, fieldName: String, fieldValue: String?, onConfirmCallBack: (editText: String) -> Unit) {
-        val dialogBinding: DialogContentSingleInputBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_content_single_input, null, false)
-        dialogBinding.tiInputBox1.hint = fieldName
-        dialogBinding.tiInputBox1.editText?.setText(fieldValue)
+    fun copyTextToClipboard(context: Context, copyText: String?, label: String? = null) {
+        baseActivity.copyTextToClipboard(context, copyText, label)
+    }
 
-        MaterialAlertDialogBuilder(context)
-            .setCancelable(false)
-            .setTitle(title)
-            .setView(dialogBinding.root)
-            .setPositiveButton(R.string.button_confirm) { _, _ ->
-                onConfirmCallBack(dialogBinding.tiInputBox1.editText?.text.toString())
-                Log.d(TAG, "confirm")
-            }
-            .setNegativeButton(R.string.button_cancel) { _, _ ->
-                Log.d(TAG, "cancel")
-            }
-            .show()
+    fun singleInputDialog(context: Context, title: String?, fieldName: String, fieldValue: String? = null, onConfirmCallBack: (editText: String) -> Unit) {
+        baseActivity.singleInputDialog(context, title, fieldName, fieldValue, onConfirmCallBack)
+    }
+
+    fun arrayItemDialog(
+        context: Context, items: Array<String?>, title: String?,
+        positiveBtn: String? = null,
+        positiveBtnCallback: (() -> Unit)? = null,
+        negativeBtn: String? = null,
+        negativeBtnCallback: (() -> Unit)? = null,
+        neutralBtn: String? = null,
+        neutralBtnCallback: (() -> Unit)? = null,
+        onDismissCallback: (selectedOption: Int) -> Unit
+    ) {
+        baseActivity.arrayItemDialog(context, items, title, positiveBtn, positiveBtnCallback, negativeBtn, negativeBtnCallback, neutralBtn, neutralBtnCallback, onDismissCallback)
+    }
+
+    inline fun <reified T : Any> editConfigJson(
+        context: Context, view: View,
+        config: T,
+        editable: Boolean = true,
+        neutralBtn: String? = null,
+        enableSaveLoadButton: Boolean = true,
+        noinline onNeutralBtnClick: (() -> Unit)? = null,
+        crossinline onConfirmClick: (editResult: T) -> Unit
+    ) {
+        (requireActivity() as BaseActivity).editConfigJson(context, view, config, editable, neutralBtn, enableSaveLoadButton, onNeutralBtnClick, onConfirmClick)
     }
 
     // Prevent unintended double/ multiple click

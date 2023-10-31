@@ -16,6 +16,9 @@
     <color name="generic_green">#0FE57D</color>
     <color name="generic_red">#FF4D4D</color>
 
+    <color name="terminal_black">#B8000000</color>
+    <color name="terminal_green">#28FE14</color>
+
     <!--utility color (text, surface)-->
     <!--neutral-->
     <color name="so_transparent">#00FFFFFF</color>

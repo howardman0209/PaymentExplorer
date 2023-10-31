@@ -4,6 +4,10 @@ import android.content.Context
 import java.util.Locale
 
 object PreferencesUtil {
+    fun clearPreferenceData(context: Context, path: String) {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        localPref?.edit()?.remove(path)?.apply()
+    }
 
     fun saveLocale(context: Context?, locale: Locale) {
         val localPref = context?.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
@@ -34,4 +38,13 @@ object PreferencesUtil {
         return localPref.getString(prefKey, "").orEmpty()
     }
 
+    fun saveLogFontSize(context: Context, fontSize: Float) {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        localPref?.edit()?.putFloat(prefLogFontSize, fontSize)?.apply()
+    }
+
+    fun getLogFontSize(context: Context): Float {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        return localPref.getFloat(prefLogFontSize, 10F)
+    }
 }

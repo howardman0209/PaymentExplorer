@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.hello.world.ui.view.fragment.DebugPanelFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.hello.world.ui.viewModel.DebugPanelViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:liftOnScroll="true"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                showIf="@{viewModel.isSearching()}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:translationZ="100dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nextBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/searchBtn"
+                showIf="@{!viewModel.isSearching()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_half"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/space_half"
+                android:src="@drawable/ic_baseline_search"
+                android:tint="@color/secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/wrapBtn"
+                showIf="@{!viewModel.isSearching()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_half"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/space_half"
+                android:src="@drawable/ic_baseline_wrap_text"
+                android:tint="@color/secondary"
+                app:layout_constraintEnd_toStartOf="@+id/saveBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/saveBtn"
+                showIf="@{!viewModel.isSearching()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_half"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/space_half"
+                android:src="@drawable/ic_baseline_save"
+                android:tint="@color/secondary"
+                app:layout_constraintEnd_toStartOf="@+id/copyBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/copyBtn"
+                showIf="@{!viewModel.isSearching()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_half"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/space_half"
+                android:src="@drawable/ic_baseline_content_copy"
+                android:tint="@color/secondary"
+                app:layout_constraintEnd_toStartOf="@+id/clearBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/clearBtn"
+                showIf="@{!viewModel.isSearching()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_half"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/space_half"
+                android:src="@drawable/ic_baseline_delete_forever"
+                android:tint="@color/secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/nextBtn"
+                showIf="@{viewModel.isSearching()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:paddingHorizontal="@dimen/space_default"
+                android:paddingVertical="@dimen/space_half"
+                android:src="@drawable/ic_baseline_navigate_next"
+                android:tint="@color/secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/terminal_black"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolsContainer">
+
+            <ScrollView
+                android:id="@+id/verticalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/space_half"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/logPanel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:textColor="@color/terminal_green"
+                        android:textIsSelectable="true"
+                        android:textSize="@dimen/font_size_log"
+                        android:typeface="monospace"
+                        tools:ignore="SmallSp"
+                        tools:text="qwertyuiop" />
+                </HorizontalScrollView>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

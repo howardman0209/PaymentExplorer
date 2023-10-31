@@ -1,5 +1,7 @@
 package com.hello.world.ui.base
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
@@ -45,8 +48,8 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseActivity : LocalizationActivity() {
     private val permCallbackMap = mutableMapOf<Int, PermissionResult.() -> Unit>()
-    lateinit var progressDialog: AlertDialog
     private var disposable: Disposable? = null
+    private lateinit var progressDialog: AlertDialog
     var permissionRequestHandler: PermissionRequestHandler? = null
     val permissionRequestLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -269,6 +272,15 @@ abstract class BaseActivity : LocalizationActivity() {
         }
     }
 
+    fun copyTextToClipboard(context: Context, copyText: String?, label: String? = null) {
+        if (!copyText.isNullOrEmpty()) {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText(label, copyText)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(context, copyText, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun singleInputDialog(context: Context, title: String?, fieldName: String, fieldValue: String? = null, onConfirmCallBack: (editText: String) -> Unit) {
         val dialogBinding: DialogContentSingleInputBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_content_single_input, null, false)
         dialogBinding.tiInputBox1.hint = fieldName
@@ -288,6 +300,45 @@ abstract class BaseActivity : LocalizationActivity() {
                 context.hideKeyboard(dialogBinding.root)
             }
             .show()
+    }
+
+    fun arrayItemDialog(
+        context: Context, items: Array<String?>, title: String?,
+        positiveBtn: String? = null,
+        positiveBtnCallback: (() -> Unit)? = null,
+        negativeBtn: String? = null,
+        negativeBtnCallback: (() -> Unit)? = null,
+        neutralBtn: String? = null,
+        neutralBtnCallback: (() -> Unit)? = null,
+        onDismissCallback: (selectedOption: Int) -> Unit
+    ) {
+        var selectedOption: Int? = null
+        MaterialAlertDialogBuilder(context)
+            .setCancelable(true)
+            .setTitle(title)
+            .setItems(items) { _, index ->
+                selectedOption = index
+            }
+            .apply {
+                positiveBtnCallback?.let {
+                    setPositiveButton(positiveBtn) { _, _ ->
+                        it.invoke()
+                    }
+                }
+                negativeBtnCallback?.let {
+                    setNegativeButton(negativeBtn) { _, _ ->
+                        it.invoke()
+                    }
+                }
+                neutralBtnCallback?.let {
+                    setNeutralButton(neutralBtn) { _, _ ->
+                        it.invoke()
+                    }
+                }
+            }
+            .setOnDismissListener {
+                selectedOption?.let { onDismissCallback.invoke(it) }
+            }.show()
     }
 
     inline fun <reified T : Any> editConfigJson(

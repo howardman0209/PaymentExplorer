@@ -49,6 +49,7 @@
     <dimen name="height_pick_item_image_dense">64dp</dimen>
 
     <!--text size-->
+    <dimen name="font_size_log">10sp</dimen>
     <dimen name="font_size_h1">56sp</dimen>
     <dimen name="font_size_h2">64sp</dimen>
     <dimen name="font_size_h3">32sp</dimen>

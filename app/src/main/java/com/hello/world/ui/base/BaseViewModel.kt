@@ -1,10 +1,9 @@
 package com.hello.world.ui.base
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hello.world.util.DATE_TIME_DISPLAY_PATTERN_FULL
+import com.hello.world.util.DATE_TIME_DISPLAY_PATTERN_SO_SHORT
 import io.reactivex.disposables.Disposable
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -22,9 +21,8 @@ open class BaseViewModel : ViewModel() {
 
     fun getDisposableList(): List<Disposable> = disposableList
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getCurrentDateTime(): String {
-        val formatter = DateTimeFormatter.ofPattern(DATE_TIME_DISPLAY_PATTERN_FULL, Locale.ENGLISH)
+    fun getCurrentDateTime(isShort: Boolean = false): String? {
+        val formatter = if (isShort) DateTimeFormatter.ofPattern(DATE_TIME_DISPLAY_PATTERN_SO_SHORT) else DateTimeFormatter.ofPattern(DATE_TIME_DISPLAY_PATTERN_FULL)
         return LocalDateTime.now().format(formatter)
     }
 
