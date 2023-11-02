@@ -19,24 +19,28 @@ import com.hello.world.util.DebugPanelManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
-import okio.BufferedSink
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.net.Inet4Address
 
 class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
     private var server: BasicServer? = null
     private lateinit var ip: String
+    private val port = 8080
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("HomeFragment", "onCreate")
         ip = getWifiIpAddress(requireContext().applicationContext) ?: "127.0.0.1"
-        server = HttpServer(8080).also {
+        server = HttpServer(port).also {
             lifecycleScope.launch(Dispatchers.IO) {
-                it.startServer(true)
+                try {
+                    it.startServer(true)
+                } catch (ex: Exception) {
+                    DebugPanelManager.log("Exception: $ex")
+                }
             }
         }
     }
@@ -52,7 +56,7 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         DebugPanelManager.log("HomeFragment - onViewCreated")
-        DebugPanelManager.log("IP - $ip")
+        DebugPanelManager.log("Server IP: $ip Port: $port")
 
         binding.homeLabel.setOnClickListener {
             sendRequest(lifecycleScope, {
@@ -60,6 +64,7 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
             }) {
                 it.message?.let { error -> DebugPanelManager.log("Error: $error") }
             }
+            viewModel.sendRequest("http://$ip:$port/")
         }
     }
 
@@ -94,19 +99,11 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         failCallBack: (ex: Exception) -> Unit
     ) {
         val client = OkHttpClient()
-        val body = object : RequestBody() {
-            override fun contentType(): MediaType? {
-                return null
-            }
-
-            override fun writeTo(sink: BufferedSink) {
-
-            }
-        }
+        val requestBody = "{\"message\": \"Hello World 2\"}".toRequestBody("application/json".toMediaTypeOrNull())
 
         val request = Request.Builder()
-            .url("http://$ip:8080/message/")
-            .method("POST", body)
+            .url("http://$ip:$port/message")
+            .method("POST", requestBody)
             .build()
         val call = client.newCall(request)
         coroutineScope.launch(Dispatchers.IO) {

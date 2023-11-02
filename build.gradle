@@ -21,6 +21,7 @@ buildscript {
         //retrofit
         retrofit_version = "2.9.0"
         retrofit_gson_convertor = "2.9.0"
+        retrofit_scalars_convertor = "2.9.0"
         retrofit_adapter_rxjava = "2.9.0"
         retrofit_logging_interceptor = "4.9.1"
 

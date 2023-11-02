@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hello.world"
+        applicationId "com.hello.world.demo"
         minSdk 25
         targetSdk 33
         versionCode 1
@@ -71,6 +71,11 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:1.2.5"
     implementation "io.ktor:ktor-gson:1.2.5"
 
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_convertor"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_scalars_convertor"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_adapter_rxjava"
     //okhttp
     implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logging_interceptor"
 }

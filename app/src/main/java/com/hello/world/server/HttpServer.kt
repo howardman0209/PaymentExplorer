@@ -1,10 +1,12 @@
 package com.hello.world.server
 
+import com.hello.world.model.PostMessageRequest
 import com.hello.world.util.DebugPanelManager
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
+import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.post
 import io.ktor.routing.routing
@@ -29,7 +31,8 @@ class HttpServer(private val port: Int) : BasicServer {
 
             routing {
                 post("/message") {
-                    DebugPanelManager.log("incoming request: /message")
+                    val requestData = call.receive<PostMessageRequest>()
+                    DebugPanelManager.log("incoming request: /message - request: $requestData")
                     call.respond(mapOf("result" to "success"))
                 }
             }
