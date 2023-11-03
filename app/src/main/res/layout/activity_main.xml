@@ -31,7 +31,6 @@
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_baseline_menu"
                 app:title="@{viewModel.title}" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -39,6 +38,7 @@
             android:id="@+id/debugPanel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:translationZ="1dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:background="@color/terminal_black" />
 
@@ -46,6 +46,7 @@
             android:id="@+id/mainContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:translationZ="0dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

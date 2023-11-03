@@ -16,13 +16,8 @@ import com.hello.world.server.HttpServer
 import com.hello.world.ui.base.MVVMFragment
 import com.hello.world.ui.viewModel.HomeViewModel
 import com.hello.world.util.DebugPanelManager
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.net.Inet4Address
 
 class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -59,12 +54,8 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         DebugPanelManager.log("Server IP: $ip Port: $port")
 
         binding.homeLabel.setOnClickListener {
-            sendRequest(lifecycleScope, {
-                DebugPanelManager.log(it)
-            }) {
-                it.message?.let { error -> DebugPanelManager.log("Error: $error") }
-            }
-            viewModel.sendRequest("http://$ip:$port/")
+            viewModel.sendRequest("http://$ip:$port", "message")
+            viewModel.sendRequestWithRetrofit("http://$ip:$port/")
         }
     }
 
@@ -92,34 +83,6 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
 
         return null
     }
-
-    private fun sendRequest(
-        coroutineScope: CoroutineScope,
-        successCallBack: (capkData: String) -> Unit,
-        failCallBack: (ex: Exception) -> Unit
-    ) {
-        val client = OkHttpClient()
-        val requestBody = "{\"message\": \"Hello World 2\"}".toRequestBody("application/json".toMediaTypeOrNull())
-
-        val request = Request.Builder()
-            .url("http://$ip:$port/message")
-            .method("POST", requestBody)
-            .build()
-        val call = client.newCall(request)
-        coroutineScope.launch(Dispatchers.IO) {
-            try {
-                val response = call.execute()
-                if (response.code == 200) {
-                    successCallBack(response.body?.string() ?: "{}")
-                } else {
-                    failCallBack.invoke(Exception("${response.code}"))
-                }
-            } catch (ex: Exception) {
-                failCallBack.invoke(ex)
-            }
-        }
-    }
-
 
     override fun getViewModelInstance(): HomeViewModel = HomeViewModel()
 
