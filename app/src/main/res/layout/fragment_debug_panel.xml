@@ -7,11 +7,11 @@
 
         <variable
             name="view"
-            type="com.hello.world.ui.view.fragment.DebugPanelFragment" />
+            type="com.mobile.gateway.ui.view.fragment.DebugPanelFragment" />
 
         <variable
             name="viewModel"
-            type="com.hello.world.ui.viewModel.DebugPanelViewModel" />
+            type="com.mobile.gateway.ui.viewModel.DebugPanelViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,11 +7,11 @@
 
         <variable
             name="view"
-            type="com.hello.world.ui.view.activity.MainActivity" />
+            type="com.mobile.gateway.ui.view.activity.MainActivity" />
 
         <variable
             name="viewModel"
-            type="com.hello.world.ui.viewModel.MainViewModel" />
+            type="com.mobile.gateway.ui.viewModel.MainViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

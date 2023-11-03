@@ -7,11 +7,11 @@
 
         <variable
             name="view"
-            type="com.hello.world.ui.view.fragment.HomeFragment" />
+            type="com.mobile.gateway.ui.view.fragment.HomeFragment" />
 
         <variable
             name="viewModel"
-            type="com.hello.world.ui.viewModel.HomeViewModel" />
+            type="com.mobile.gateway.ui.viewModel.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

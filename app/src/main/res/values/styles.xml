@@ -1,10 +1,10 @@
 <resources>
     <!--Component style-->
     <!--the style could be used directly on layout or used in the theme default-->
-    <style name="Widget.hello.world" parent="" />
+    <style name="Widget.mobile.gateway" parent="" />
 
     <!--Toolbar style-->
-    <style name="Widget.hello.world.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+    <style name="Widget.mobile.gateway.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="android:minHeight">?actionBarSize</item>
         <item name="android:background">?android:colorBackground</item>
         <item name="titleTextAppearance">?textAppearanceHeadline6</item>
@@ -15,20 +15,20 @@
         <item name="contentInsetStart">0dp</item>
     </style>
 
-    <style name="Widget.hello.world.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Surface">
+    <style name="Widget.mobile.gateway.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Surface">
         <item name="liftOnScroll">true</item>
     </style>
 
-    <style name="Widget.hello.world.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
+    <style name="Widget.mobile.gateway.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">?colorNeutral</item>
     </style>
 
-    <style name="Widget.hello.world.Toolbar.Button.Navigation" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+    <style name="Widget.mobile.gateway.Toolbar.Button.Navigation" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:tint">?colorNeutral</item>
     </style>
 
     <!--Bottom navigation style-->
-    <style name="Widget.hello.world.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="Widget.mobile.gateway.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="elevation">@dimen/elevation_high</item>
         <item name="android:background">@drawable/rect_round_top_double</item>
         <item name="backgroundTint">@color/so_dark_variant</item>
@@ -39,7 +39,7 @@
 
     <!--Button style-->
     <!--Flat-->
-    <style name="Widget.hello.world.Button.Flat" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+    <style name="Widget.mobile.gateway.Button.Flat" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:minHeight">@dimen/min_touch_area</item>
         <item name="android:minWidth">@dimen/min_button_width</item>
         <item name="android:paddingStart">@dimen/space_default</item>
@@ -59,69 +59,69 @@
         <item name="rippleColor">@color/neutral_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.PrimaryVariant" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.PrimaryVariant" parent="Widget.mobile.gateway.Button.Flat">
         <item name="backgroundTint">@color/primary_variant</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.Secondary" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.Secondary" parent="Widget.mobile.gateway.Button.Flat">
         <item name="backgroundTint">@color/secondary</item>
         <item name="android:textColor">@color/on_secondary</item>
         <item name="iconTint">@color/on_secondary</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.Tertiary" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.Tertiary" parent="Widget.mobile.gateway.Button.Flat">
         <item name="backgroundTint">@color/neutral</item>
         <item name="android:textColor">@color/on_neutral</item>
         <item name="iconTint">@color/on_neutral</item>
         <item name="rippleColor">@color/on_neutral_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.Error" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.Error" parent="Widget.mobile.gateway.Button.Flat">
         <item name="backgroundTint">@color/error</item>
         <item name="android:textColor">@color/on_error</item>
         <item name="iconTint">@color/on_error</item>
     </style>
 
     <!--Large text button-->
-    <style name="Widget.hello.world.Button.Flat.LargeText" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeText" parent="Widget.mobile.gateway.Button.Flat">
         <item name="android:textSize">@dimen/font_size_h3</item>
         <item name="android:textColor">@color/so_dark</item>
         <item name="android:textAlignment">center</item>
     </style>
 
     <!--Large icon button-->
-    <style name="Widget.hello.world.Button.Flat.LargeIcon" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon" parent="Widget.mobile.gateway.Button.Flat">
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Secondary" parent="Widget.hello.world.Button.Flat.Secondary">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Secondary" parent="Widget.mobile.gateway.Button.Flat.Secondary">
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Outlined.LargeIcon" parent="Widget.hello.world.Button.Outlined">
+    <style name="Widget.mobile.gateway.Button.Outlined.LargeIcon" parent="Widget.mobile.gateway.Button.Outlined">
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Outlined.LargeIcon.Secondary" parent="Widget.hello.world.Button.Outlined.Secondary">
+    <style name="Widget.mobile.gateway.Button.Outlined.LargeIcon.Secondary" parent="Widget.mobile.gateway.Button.Outlined.Secondary">
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Tertiary" parent="Widget.hello.world.Button.Flat.Tertiary">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Tertiary" parent="Widget.mobile.gateway.Button.Flat.Tertiary">
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Error" parent="Widget.hello.world.Button.Flat.Error">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Error" parent="Widget.mobile.gateway.Button.Flat.Error">
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
     <!--swiped list side buttons-->
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Square" parent="Widget.hello.world.Button.Flat.LargeIcon">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Square" parent="Widget.mobile.gateway.Button.Flat.LargeIcon">
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:minWidth">@dimen/min_touch_area</item>
@@ -129,7 +129,7 @@
         <item name="cornerRadius">0dp</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Square.Secondary" parent="Widget.hello.world.Button.Flat.LargeIcon.Secondary">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Square.Secondary" parent="Widget.mobile.gateway.Button.Flat.LargeIcon.Secondary">
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:minWidth">@dimen/min_touch_area</item>
@@ -137,7 +137,7 @@
         <item name="cornerRadius">0dp</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Square.Tertiary" parent="Widget.hello.world.Button.Flat.LargeIcon.Tertiary">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Square.Tertiary" parent="Widget.mobile.gateway.Button.Flat.LargeIcon.Tertiary">
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:minWidth">@dimen/min_touch_area</item>
@@ -145,7 +145,7 @@
         <item name="cornerRadius">0dp</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.LargeIcon.Square.Error" parent="Widget.hello.world.Button.Flat.LargeIcon.Error">
+    <style name="Widget.mobile.gateway.Button.Flat.LargeIcon.Square.Error" parent="Widget.mobile.gateway.Button.Flat.LargeIcon.Error">
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:minWidth">@dimen/min_touch_area</item>
@@ -153,7 +153,7 @@
         <item name="cornerRadius">0dp</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Flat.QuickLaunch" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.Flat.QuickLaunch" parent="Widget.mobile.gateway.Button.Flat">
         <item name="android:elevation">@dimen/elevation_low</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:minHeight">@dimen/min_card_height</item>
@@ -171,7 +171,7 @@
         <item name="rippleColor">@color/neutral_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.PaymentMethod" parent="Widget.hello.world.Button.Flat">
+    <style name="Widget.mobile.gateway.Button.PaymentMethod" parent="Widget.mobile.gateway.Button.Flat">
         <item name="android:elevation">@dimen/elevation_low</item>
         <item name="android:paddingStart">@dimen/space_default</item>
         <item name="android:paddingEnd">@dimen/space_default</item>
@@ -188,7 +188,7 @@
         <item name="iconTintMode">add</item>
     </style>
 
-    <style name="Widget.hello.world.Button.PaymentMethod.NoBackground" parent="Widget.hello.world.Button.PaymentMethod">
+    <style name="Widget.mobile.gateway.Button.PaymentMethod.NoBackground" parent="Widget.mobile.gateway.Button.PaymentMethod">
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">0dp</item>
         <item name="android:padding">0dp</item>
@@ -197,7 +197,7 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Report.NoBackground" parent="Widget.hello.world.Button.PaymentMethod">
+    <style name="Widget.mobile.gateway.Button.Report.NoBackground" parent="Widget.mobile.gateway.Button.PaymentMethod">
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">0dp</item>
         <item name="android:paddingStart">8dp</item>
@@ -208,7 +208,7 @@
     </style>
 
     <!--Outlined button-->
-    <style name="Widget.hello.world.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Widget.mobile.gateway.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:minHeight">@dimen/min_touch_area</item>
         <item name="android:minWidth">@dimen/min_button_width</item>
         <item name="android:paddingStart">@dimen/space_half</item>
@@ -229,28 +229,28 @@
         <item name="rippleColor">@color/primary_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Outlined.Secondary" parent="Widget.hello.world.Button.Outlined">
+    <style name="Widget.mobile.gateway.Button.Outlined.Secondary" parent="Widget.mobile.gateway.Button.Outlined">
         <item name="strokeColor">@color/secondary</item>
         <item name="android:textColor">@color/secondary</item>
         <item name="iconTint">@color/secondary</item>
         <item name="rippleColor">@color/secondary_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Outlined.Tertiary" parent="Widget.hello.world.Button.Outlined">
+    <style name="Widget.mobile.gateway.Button.Outlined.Tertiary" parent="Widget.mobile.gateway.Button.Outlined">
         <item name="strokeColor">@color/neutral_emphasis_medium</item>
         <item name="android:textColor">@color/neutral_emphasis_medium</item>
         <item name="iconTint">@color/neutral_emphasis_medium</item>
         <item name="rippleColor">@color/neutral_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.Outlined.Error" parent="Widget.hello.world.Button.Outlined">
+    <style name="Widget.mobile.gateway.Button.Outlined.Error" parent="Widget.mobile.gateway.Button.Outlined">
         <item name="strokeColor">@color/error</item>
         <item name="android:textColor">@color/error</item>
         <item name="iconTint">@color/error</item>
         <item name="rippleColor">@color/error_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.SelectInstrument" parent="Widget.hello.world.Button.Outlined.Tertiary">
+    <style name="Widget.mobile.gateway.SelectInstrument" parent="Widget.mobile.gateway.Button.Outlined.Tertiary">
         <item name="android:paddingBottom">@dimen/space_default</item>
         <item name="iconGravity">top</item>
         <item name="iconPadding">0dp</item>
@@ -259,7 +259,7 @@
     </style>
 
     <!--Text button-->
-    <style name="Widget.hello.world.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+    <style name="Widget.mobile.gateway.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:minHeight">@dimen/min_touch_area_dense</item>
         <item name="android:minWidth">@dimen/min_button_width</item>
         <item name="android:paddingStart">@dimen/space_half</item>
@@ -278,26 +278,26 @@
         <item name="rippleColor">@color/primary_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.TextButton.Secondary" parent="Widget.hello.world.Button.TextButton">
+    <style name="Widget.mobile.gateway.Button.TextButton.Secondary" parent="Widget.mobile.gateway.Button.TextButton">
         <item name="android:textColor">@color/secondary</item>
         <item name="iconTint">@color/secondary</item>
         <item name="rippleColor">@color/secondary_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.TextButton.Tertiary" parent="Widget.hello.world.Button.TextButton">
+    <style name="Widget.mobile.gateway.Button.TextButton.Tertiary" parent="Widget.mobile.gateway.Button.TextButton">
         <item name="android:textColor">@color/neutral_emphasis_medium</item>
         <item name="iconTint">@color/neutral_emphasis_medium</item>
         <item name="rippleColor">@color/neutral_emphasis_low</item>
     </style>
 
-    <style name="Widget.hello.world.Button.TextButton.Dialog" parent="Widget.hello.world.Button.TextButton">
+    <style name="Widget.mobile.gateway.Button.TextButton.Dialog" parent="Widget.mobile.gateway.Button.TextButton">
         <item name="android:insetTop">3dp</item>
         <item name="android:insetRight">3dp</item>
         <item name="android:insetLeft">3dp</item>
         <item name="android:insetBottom">3dp</item>
     </style>
 
-    <style name="Widget.hello.world.Button.TransparentBackground.Square" parent="Widget.hello.world.Button.TextButton.Tertiary">
+    <style name="Widget.mobile.gateway.Button.TransparentBackground.Square" parent="Widget.mobile.gateway.Button.TextButton.Tertiary">
         <item name="android:minHeight">@dimen/min_touch_area_dense</item>
         <item name="android:minWidth">@dimen/min_touch_area_dense</item>
         <item name="minWidth">@null</item>
@@ -305,87 +305,87 @@
         <item name="iconSize">@dimen/icon_medium</item>
     </style>
 
-    <style name="Widget.hello.world.Button.TransparentBackground.Circle" parent="Widget.hello.world.Button.TextButton.Tertiary">
+    <style name="Widget.mobile.gateway.Button.TransparentBackground.Circle" parent="Widget.mobile.gateway.Button.TextButton.Tertiary">
         <item name="android:minHeight">@dimen/min_touch_area_dense</item>
         <item name="android:minWidth">@dimen/min_touch_area_dense</item>
         <item name="minWidth">@null</item>
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/icon_medium</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.hello.world.Small.Circle</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.mobile.gateway.Small.Circle</item>
     </style>
 
-    <style name="Widget.hello.world.Button.TransparentBackground.Circle.IconNormalSize" parent="Widget.hello.world.Button.TransparentBackground.Circle">
+    <style name="Widget.mobile.gateway.Button.TransparentBackground.Circle.IconNormalSize" parent="Widget.mobile.gateway.Button.TransparentBackground.Circle">
         <item name="iconSize">@dimen/icon_normal</item>
     </style>
 
     <!--Floating action button style-->
-    <style name="Widget.hello.world.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+    <style name="Widget.mobile.gateway.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="elevation">@dimen/elevation_high</item>
     </style>
 
-    <style name="Widget.hello.world.ExtendedFloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+    <style name="Widget.mobile.gateway.ExtendedFloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
         <item name="android:textAppearance">?textAppearanceTextButton</item>
         <item name="android:minWidth">@dimen/min_touch_area_dense</item>
         <item name="android:paddingStart">@dimen/space_default</item>
         <item name="android:paddingEnd">@dimen/space_default</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.hello.world.Small.Rounded</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.mobile.gateway.Small.Rounded</item>
         <item name="iconPadding">@dimen/space_half</item>
     </style>
 
     <!--Snackbar style-->
-    <style name="Widget.hello.world.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+    <style name="Widget.mobile.gateway.Snackbar" parent="Widget.MaterialComponents.Snackbar">
         <item name="backgroundOverlayColorAlpha">1</item>
         <item name="actionTextColorAlpha">1</item>
         <item name="android:layout_margin">@dimen/space_default</item>
         <item name="elevation">@dimen/elevation_medium</item>
     </style>
 
-    <style name="Widget.hello.world.SnackbarButton" parent="Widget.hello.world.Button.TextButton">
+    <style name="Widget.mobile.gateway.SnackbarButton" parent="Widget.mobile.gateway.Button.TextButton">
         <item name="android:textAppearance">?textAppearanceTextButton</item>
         <!--<item name="android:textColor">?colorSecondary</item>-->
     </style>
 
     <!--Checkbox style-->
-    <style name="Widget.hello.world.Checkbox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+    <style name="Widget.mobile.gateway.Checkbox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="android:textAppearance">?textAppearanceBody1</item>
         <item name="android:textColor">@color/neutral_emphasis_high</item>
     </style>
 
     <!--RadioButton style-->
-    <style name="Widget.hello.world.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+    <style name="Widget.mobile.gateway.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
         <item name="android:textAppearance">?textAppearanceBody1</item>
         <item name="android:textColor">@color/neutral_emphasis_high</item>
     </style>
 
     <!--Switch style-->
-    <style name="Widget.hello.world.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+    <style name="Widget.mobile.gateway.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="android:textAppearance">?textAppearanceBody1</item>
         <item name="android:textColor">@color/neutral_emphasis_high</item>
     </style>
 
     <!--Input layout-->
-    <!--<style name="Widget.hello.world.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--<style name="Widget.mobile.gateway.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">-->
     <!--    <item name="android:textColor">@color/csl_neutral_emphasis_high</item>-->
     <!--    <item name="hintTextAppearance">?textAppearanceCaption</item>-->
     <!--    <item name="counterTextAppearance">?textAppearanceCaption</item>-->
     <!--    <item name="errorTextAppearance">?textAppearanceCaption</item>-->
     <!--</style>-->
 
-    <!--<style name="Widget.hello.world.TextInputEditText">-->
+    <!--<style name="Widget.mobile.gateway.TextInputEditText">-->
     <!--    <item name="android:textAppearance">?textAppearanceBody1</item>-->
     <!--</style>-->
 
     <!--Divider style-->
-    <style name="Widget.hello.world.Divider">
+    <style name="Widget.mobile.gateway.Divider">
         <item name="android:background">?colorOnSurface</item>
         <item name="android:backgroundTint">@color/divider</item>
         <item name="android:tintMode">src_in</item>
     </style>
 
     <!--Amount Display style-->
-    <style name="Widget.hello.world.DisplayText" />
+    <style name="Widget.mobile.gateway.DisplayText" />
 
-    <style name="Widget.hello.world.DisplayText.Amount">
+    <style name="Widget.mobile.gateway.DisplayText.Amount">
         <item name="android:gravity">center</item>
         <item name="android:textAppearance">?textAppearanceHeadline2</item>
         <item name="android:fontFeatureSettings">tnum</item>
@@ -394,14 +394,14 @@
         <item name="autoSizeStepGranularity">4sp</item>
     </style>
 
-    <!--    <style name="Widget.hello.world.DisplayText.Currency">-->
+    <!--    <style name="Widget.mobile.gateway.DisplayText.Currency">-->
     <!--        <item name="android:textAppearance">?textAppearanceHeadline3</item>-->
     <!--        <item name="android:textColor">@color/csl_neutral_emphasis_medium</item>-->
     <!--        <item name="android:fontFeatureSettings">tnum</item>-->
     <!--    </style>-->
 
     <!--Keypad style-->
-    <style name="Widget.hello.world.KeypadKey" parent="TextAppearance.hello.world.Headline3">
+    <style name="Widget.mobile.gateway.KeypadKey" parent="TextAppearance.mobile.gateway.Headline3">
         <item name="android:background">?selectableItemBackgroundBorderless</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
@@ -413,23 +413,23 @@
     </style>
 
     <!--Bottom sheet (dialog)-->
-    <!--<style name="ThemeOverlay.hello.world.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">-->
+    <!--<style name="ThemeOverlay.mobile.gateway.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">-->
     <!--<item name="android:windowIsFloating">false</item>-->
     <!--<item name="android:windowBackground">@android:color/transparent</item>-->
     <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
-    <!--<item name="bottomSheetStyle">@style/Widget.hello.world.BottomSheet.Modal</item>-->
+    <!--<item name="bottomSheetStyle">@style/Widget.mobile.gateway.BottomSheet.Modal</item>-->
     <!--<item name="android:navigationBarColor">?colorSurface</item>-->
     <!--<item name="android:navigationBarDividerColor" tools:ignore="NewApi">@android:color/transparent</item>-->
     <!--</style>-->
-    <!--<style name="Widget.hello.world.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">-->
+    <!--<style name="Widget.mobile.gateway.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">-->
     <!--<item name="shapeAppearanceOverlay">?shapeAppearanceLargeComponent</item>-->
     <!--</style>-->
 
-    <style name="Widget.hello.world.Tooltip" parent="Widget.MaterialComponents.Tooltip">
+    <style name="Widget.mobile.gateway.Tooltip" parent="Widget.MaterialComponents.Tooltip">
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
-    <style name="Widget.hello.world.List.Header" parent="TextAppearance.hello.world.Subtitle1">
+    <style name="Widget.mobile.gateway.List.Header" parent="TextAppearance.mobile.gateway.Subtitle1">
         <item name="android:layout_marginTop">@dimen/space_double</item>
         <item name="android:layout_marginStart">@dimen/space_default</item>
         <item name="android:layout_marginBottom">@dimen/space_half</item>
@@ -440,7 +440,7 @@
         <item name="android:drawablePadding">@dimen/space_half</item>
     </style>
 
-    <style name="Widget.hello.world.List.SingleLineItem" parent="TextAppearance.hello.world.Body1">
+    <style name="Widget.mobile.gateway.List.SingleLineItem" parent="TextAppearance.mobile.gateway.Body1">
         <item name="android:clickable">true</item>
         <item name="android:drawablePadding">@dimen/space_half</item>
         <item name="android:drawableTint">@color/neutral_emphasis_medium</item>
@@ -451,7 +451,7 @@
         <item name="android:textColor">@color/neutral_emphasis_high</item>
     </style>
 
-    <style name="Widget.hello.world.AcceptanceMark">
+    <style name="Widget.mobile.gateway.AcceptanceMark">
         <item name="android:layout_marginStart">@dimen/space_quarter</item>
         <item name="android:layout_marginEnd">@dimen/space_quarter</item>
         <item name="android:scaleType">fitCenter</item>
@@ -462,7 +462,7 @@
         <attr name="body" format="string" />
     </declare-styleable>
 
-    <style name="Widget.hello.world.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+    <style name="Widget.mobile.gateway.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:backgroundTint">?android:colorBackground</item>
         <item name="tabMode">fixed</item>
         <item name="tabTextColor">@color/neutral_emphasis_medium</item>
@@ -470,7 +470,7 @@
 
     </style>
 
-    <style name="Widget.hello.world.CircleTabIndicator" parent="Widget.MaterialComponents.TabLayout">
+    <style name="Widget.mobile.gateway.CircleTabIndicator" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabIndicatorHeight">0dp</item>
         <item name="tabGravity">center</item>
         <item name="background">@null</item>

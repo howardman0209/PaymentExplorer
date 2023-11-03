@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hello.world">
+    package="com.mobile.gateway">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -11,7 +11,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -33,7 +35,7 @@
     <uses-permission android:name="android.permission.NFC" />
 
     <application
-        android:name="com.hello.world.MainApplication"
+        android:name="com.mobile.gateway.MainApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -42,13 +44,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.hello.world.DayNight"
+        android:theme="@style/Theme.mobile.gateway.DayNight"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:label,android:allowBackup,android:theme"
         tools:targetApi="31">
         <activity
-            android:name="com.hello.world.ui.view.activity.TemplateActivity"
+            android:name="com.mobile.gateway.ui.view.activity.TemplateActivity"
             android:exported="true"
             android:noHistory="true"
             android:screenOrientation="portrait"

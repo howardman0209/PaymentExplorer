@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Hello World</string>
+    <string name="app_name" translatable="false">Mobile Gateway</string>
 
     <!--    common-->
     <string name="label_login">Login</string>
