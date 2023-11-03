@@ -13,6 +13,7 @@ import com.hello.world.R
 import com.hello.world.databinding.FragmentHomeBinding
 import com.hello.world.server.BasicServer
 import com.hello.world.server.HttpServer
+import com.hello.world.server.ISO8583Server
 import com.hello.world.ui.base.MVVMFragment
 import com.hello.world.ui.viewModel.HomeViewModel
 import com.hello.world.util.DebugPanelManager
@@ -29,7 +30,17 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         super.onCreate(savedInstanceState)
         Log.d("HomeFragment", "onCreate")
         ip = getWifiIpAddress(requireContext().applicationContext) ?: "127.0.0.1"
-        server = HttpServer(port).also {
+//        server = HttpServer(port).also {
+//            lifecycleScope.launch(Dispatchers.IO) {
+//                try {
+//                    it.startServer(true)
+//                } catch (ex: Exception) {
+//                    DebugPanelManager.log("Exception: $ex")
+//                }
+//            }
+//        }
+
+        server = ISO8583Server(ip, "$port").also {
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     it.startServer(true)

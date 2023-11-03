@@ -78,4 +78,11 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_adapter_rxjava"
     //okhttp
     implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logging_interceptor"
+
+    //JPOS
+    //noinspection GradleDependency
+    implementation('org.jpos:jpos:1.9.2') {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'com.sleepycat', module: 'je'
+    }
 }
