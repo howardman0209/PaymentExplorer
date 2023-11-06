@@ -4,11 +4,12 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.mobile.gateway.extension.hexToAscii
-import com.mobile.gateway.extension.hexToBinary
 import com.mobile.gateway.extension.hexToByteArray
+import com.mobile.gateway.extension.toDateString
 import com.mobile.gateway.extension.toHexString
 import com.mobile.gateway.server.BasicServer
 import com.mobile.gateway.util.DebugPanelManager
+import com.mobile.gateway.util.ISO8583Util
 import com.mobile.gateway.util.TlvUtil
 import org.jpos.core.SimpleConfiguration
 import org.jpos.iso.ISOMsg
@@ -50,23 +51,19 @@ class ISO8583Server(private var host: String, private var port: String) : BasicS
     }
 
     private fun eavesdrop(isoMsg: ISOMsg?) {
+        val logMessage = StringBuilder()
         val rawHexData = isoMsg?.pack()?.toHexString()?.uppercase()
-        DebugPanelManager.log("${if (isoMsg?.isIncoming == true) "<-- " else "--> "} $rawHexData")
+        logMessage.append("${if (isoMsg?.isIncoming == true) "Incoming <-- " else "Outgoing --> "} $rawHexData\n")
         val mti = isoMsg?.mti
-        DebugPanelManager.log("MTI: $mti")
-        val bitmap = mutableListOf<Int>()
-        rawHexData?.substring(4, 20)?.hexToBinary()?.forEachIndexed { index, char ->
-            if (char == '1') {
-                bitmap.add((index + 1))
-            }
-        }
-        DebugPanelManager.log("Bitmap: $bitmap")
-        bitmap.forEach {
+        logMessage.append("MTI: $mti\n")
+        val bitmap = rawHexData?.substring(4, 20)?.let { ISO8583Util.getFieldsFromHex(it) }
+        logMessage.append("Bitmap: $bitmap\n")
+        bitmap?.forEach {
             val field = Basic8583Field.getByFieldNo(it)
             val fieldNo = it.toString().padStart(2, '0')
 
             val value = StringBuilder()
-            val data = isoMsg?.getBytes(it)?.toHexString()?.uppercase() ?: ""
+            val data = isoMsg.getBytes(it)?.toHexString()?.uppercase() ?: ""
             when (it) {
                 62, 63 -> {
                     value.append(data)
@@ -83,14 +80,39 @@ class ISO8583Server(private var host: String, private var port: String) : BasicS
                     value.append(asciiValue)
                 }
             }
-            DebugPanelManager.log("[$fieldNo] ${field?.name}: $value")
+            logMessage.append("[$fieldNo] ${field?.name}: $value\n")
         }
+        DebugPanelManager.log(logMessage.toString())
     }
 
     private fun constructReply(isoReq: ISOMsg): ISOMsg {
         val isoReply = ISOMsg()
         isoReply.mti = (isoReq.mti.toInt() + 10).toString().padStart(4, '0')
+        val replyFields = listOf(4, 11, 12, 13, 24, 37, 38, 39, 41)
+        val requestFields = ISO8583Util.getFieldsFromHex(isoReq.pack().toHexString().uppercase().substring(4, 20))
+        replyFields.forEach {
+            if (requestFields.contains(it)) {
+                isoReply.set(it, isoReq.getBytes(it))
+            }
+            val currentTimestamp = ISO8583Util.getTimeStamp()
+            when (it) {
+                12, 38 -> {
+                    isoReply.set(it, currentTimestamp.toDateString("hhmmss").toByteArray())
+                }
 
+                13 -> {
+                    isoReply.set(it, currentTimestamp.toDateString("MMdd").toByteArray())
+                }
+
+                37 -> {
+                    isoReply.set(it, currentTimestamp.toDateString("YYMMddhhmmss").toByteArray())
+                }
+
+                39 -> {
+                    isoReply.set(it, "00".toByteArray())
+                }
+            }
+        }
         return isoReply
     }
 
