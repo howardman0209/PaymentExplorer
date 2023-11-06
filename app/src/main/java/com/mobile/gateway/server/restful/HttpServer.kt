@@ -1,6 +1,7 @@
-package com.mobile.gateway.server
+package com.mobile.gateway.server.restful
 
 import com.mobile.gateway.model.PostMessageRequest
+import com.mobile.gateway.server.BasicServer
 import com.mobile.gateway.util.DebugPanelManager
 import io.ktor.application.call
 import io.ktor.application.install

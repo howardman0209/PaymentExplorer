@@ -1,0 +1,51 @@
+package com.mobile.gateway.server.iso8583
+
+enum class Basic8583Field(val fieldNo: Int) {
+    PAN(2),
+    ProcessingCode(3),
+    TransactionAmount(4),
+    SettlementAmount(5),
+    CardHolderBillingAmount(6),
+    CardHolderBillingConvertRate(10),
+    TraceNumber(11),
+    TransactionTime(12),
+    TransactionDate(13),
+    ExpirationDate(14),
+    SettlementDate(15),
+    PosEntryMode(22),
+    PanSequenceNumber(23),
+    NetworkInternationalId(24),
+    PosConditionCode(25),
+    PinCaptureCode(26),
+    AcquiringInstitutionId(32),
+    Track2Data(35),
+    Track3Data(36),
+    RetrievalRefNumber(37),
+    AuthIdResponse(38),
+    ResponseCode(39),
+    ServiceRestrictionCode(40),
+    CardAcceptorTerminalId(41),
+    CardAcceptorId(42),
+    CardAcceptorNameLocation(43),
+    AdditionalResponseData(44),
+    Track1Data(45),
+    AdditionalData1(46),
+    AdditionalData2(47),
+    AdditionalData3(48),
+    TransactionCurrencyCode(49),
+    BillingCurrencyCode(51),
+    PinData(52),
+    SecurityRelatedControlInformation(53),
+    OtherAmount(54),
+    ICCData(55),
+    TCData(56),
+    PrivateUseData60(60),
+    PrivateUseData61(61),
+    PrivateUseData62(62),
+    PrivateUseData63(63),
+    MessageAuthenticationCode(64);
+    companion object {
+        private val values = values()
+        fun getByFieldNo(fieldNo: Int?) = values.firstOrNull { it.fieldNo == fieldNo }
+    }
+}

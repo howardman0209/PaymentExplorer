@@ -12,8 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.mobile.gateway.R
 import com.mobile.gateway.databinding.FragmentHomeBinding
 import com.mobile.gateway.server.BasicServer
-import com.mobile.gateway.server.HttpServer
-import com.mobile.gateway.server.ISO8583Server
+import com.mobile.gateway.server.iso8583.ISO8583Server
 import com.mobile.gateway.ui.base.MVVMFragment
 import com.mobile.gateway.ui.viewModel.HomeViewModel
 import com.mobile.gateway.util.DebugPanelManager
@@ -62,7 +61,7 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         DebugPanelManager.log("HomeFragment - onViewCreated")
-        DebugPanelManager.log("Server IP: $ip Port: $port")
+        DebugPanelManager.log("Server IP: $ip Port: $port\n")
 
         binding.homeLabel.setOnClickListener {
             viewModel.sendRequest("http://$ip:$port", "message")

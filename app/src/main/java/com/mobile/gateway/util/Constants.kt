@@ -38,3 +38,6 @@ const val localeCountryPrefKey = "localeCountry"
 
 //prefKey
 const val prefLogFontSize = "prefLogFontSize"
+
+//APDU command response code
+const val APDU_RESPONSE_CODE_OK = "9000"

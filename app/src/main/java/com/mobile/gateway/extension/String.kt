@@ -46,6 +46,11 @@ fun String.asciiToHex(separator: String = " "): String {
     return output.toString()
 }
 
+fun String.hexToBinary(): String {
+    val binary = this.toLong(16).toString(2).uppercase()
+    return binary.padStart(this.length * 4, '0')
+}
+
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 inline fun <reified T> String.toDataClass(): T {

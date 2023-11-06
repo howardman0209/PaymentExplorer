@@ -16,13 +16,13 @@ object DebugPanelManager {
     val display: LiveData<Event<Boolean>>
         get() = _display
 
-    fun log(message: String) {
+    fun log(message: String?) {
         CoroutineScope(Dispatchers.Main).launch {
-            _messageToLog.value = Event(message)
+            _messageToLog.value = Event(message ?: "null")
         }
     }
 
-    fun show(visibility:Boolean) {
+    fun show(visibility: Boolean) {
         CoroutineScope(Dispatchers.Main).launch {
             _display.value = Event(visibility)
         }
