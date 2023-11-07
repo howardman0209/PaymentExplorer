@@ -1,11 +1,15 @@
 package com.mobile.gateway.ui.view.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
@@ -15,8 +19,10 @@ import com.mobile.gateway.server.BasicServer
 import com.mobile.gateway.server.iso8583.ISO8583Server
 import com.mobile.gateway.server.restful.HttpServer
 import com.mobile.gateway.ui.base.MVVMFragment
+import com.mobile.gateway.ui.view.activity.SettingActivity
 import com.mobile.gateway.ui.viewModel.HomeViewModel
 import com.mobile.gateway.util.DebugPanelManager
+import com.mobile.gateway.util.LongLogUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.Inet4Address
@@ -25,6 +31,7 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
     private var server: BasicServer? = null
     private lateinit var ip: String
     private val port = 8080
+    private var isDebug = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +58,38 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.tools, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("onOptionsItemSelected", "item: $item")
+        when (item.itemId) {
+            R.id.action_test -> {
+                val test = ""
+                LongLogUtil.debug("@@", "test: $test")
+                DebugPanelManager.log("test: $test")
+            }
+
+            R.id.tool_logcat -> {
+                isDebug = !isDebug
+                DebugPanelManager.show(isDebug)
+            }
+
+            R.id.action_settings -> {
+                startActivity(Intent(requireContext().applicationContext, SettingActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -10,6 +10,8 @@
     <string name="label_off">off</string>
     <string name="other">Other</string>
     <string name="label_loading">Loading…</string>
+    <string name="label_logcat" translatable="false">Logcat</string>
+    <string name="label_info" translatable="false">Information</string>
 
     <!--    bottom navigation tab label-->
     <string name="label_bottom_nav_tab1" translatable="false">tab1</string>
@@ -725,4 +727,12 @@
 
     <string name="label_save_to_file" translatable="false">Save to file</string>
     <string name="label_load_from_file" translatable="false">Load from file</string>
+
+    <!--Settings-->
+    <string name="label_setting_log_font_size" translatable="false">Log font setting</string>
+    <!--Font Setting-->
+    <string name="label_font_size" translatable="false">Font Size</string>
+    <string name="label_log_font_size_min" translatable="false">10sp</string>
+    <string name="label_log_font_size_max" translatable="false">20sp</string>
+    <string name="var_font_size" translatable="false">%ssp</string>
 </resources>

@@ -14,7 +14,6 @@ import com.mobile.gateway.ui.viewModel.MainViewModel
 import com.mobile.gateway.util.DebugPanelManager
 
 class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
-    private var isDebug = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "onCreate")
@@ -25,8 +24,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
         setUpMainContainer()
 
         binding.topAppBar.setNavigationOnClickListener {
-            isDebug = !isDebug
-            DebugPanelManager.show(isDebug)
+
         }
 
         DebugPanelManager.display.observe(this) {
