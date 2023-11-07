@@ -19,18 +19,91 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/homeLabel"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/label_hello"
-            android:textAlignment="center"
-            android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/space_default"
+            android:text="@{viewModel.ipAddress}"
+            android:textSize="@dimen/font_size_h5"
+            app:layout_constraintBottom_toBottomOf="@+id/tiPort"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Hello" />
+            tools:ignore="RtlSymmetry"
+            tools:text="IP: 127.0.0.1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnCopy"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/space_default"
+            android:src="@drawable/ic_baseline_content_copy"
+            android:tint="@color/secondary"
+            app:layout_constraintBottom_toBottomOf="@+id/tiPort"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiPort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{!viewModel.serverStarted}"
+            android:gravity="center_vertical"
+            android:padding="@dimen/space_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnCopy"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_port"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                tools:text="10004" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCondition1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_default"
+            android:enabled="@{!viewModel.serverStarted}"
+            android:hint="@string/label_server"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCopy"
+            tools:hint="Server">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoTvCondition1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOnOff"
+            style="@style/Widget.mobile.gateway.Button.TextButton.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:enabled="@{!autoTvCondition1.text.toString().empty}"
+            android:text="@{viewModel.serverStarted? @string/label_stop : @string/label_start}"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCondition1"
+            tools:text="Start" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

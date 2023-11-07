@@ -1,6 +1,7 @@
 package com.mobile.gateway.ui.viewModel
 
 import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
 import com.mobile.gateway.model.PostMessageRequest
 import com.mobile.gateway.network.ApiManager
@@ -17,7 +18,8 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class HomeViewModel : BaseViewModel() {
-
+    val ipAddress = ObservableField<String>()
+    val serverStarted = ObservableField(false)
     fun sendRequestWithRetrofit(path: String) {
         disposableList.add(
             ApiManager.create<GatewayService>(path)

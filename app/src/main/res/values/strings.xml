@@ -390,7 +390,7 @@
     <string name="label_item_field_required">Required</string>
     <string name="label_item_field_price_type">Price should be any positive or negative number</string>
     <string name="label_item_category_manage">Product &amp; category management</string>
-<!--    <string name="label_coupon_manage">Coupon management</string>-->
+    <!--    <string name="label_coupon_manage">Coupon management</string>-->
     <string name="label_item_manage">Product</string>
     <string name="label_category_manage">Category</string>
     <string name="label_coupon_manage">Coupon</string>
@@ -735,4 +735,10 @@
     <string name="label_log_font_size_min" translatable="false">10sp</string>
     <string name="label_log_font_size_max" translatable="false">20sp</string>
     <string name="var_font_size" translatable="false">%ssp</string>
+
+    <!--Home-->
+    <string name="label_port" translatable="false">Port</string>
+    <string name="label_server" translatable="false">Server</string>
+    <string name="label_start" translatable="false">Start</string>
+    <string name="label_stop" translatable="false">Stop</string>
 </resources>

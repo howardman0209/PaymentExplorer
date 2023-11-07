@@ -1,8 +1,6 @@
 package com.mobile.gateway.server.iso8583
 
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.mobile.gateway.extension.hexToAscii
 import com.mobile.gateway.extension.hexToByteArray
 import com.mobile.gateway.extension.toDateString
@@ -11,41 +9,50 @@ import com.mobile.gateway.server.BasicServer
 import com.mobile.gateway.util.DebugPanelManager
 import com.mobile.gateway.util.ISO8583Util
 import com.mobile.gateway.util.TlvUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jpos.core.SimpleConfiguration
 import org.jpos.iso.ISOMsg
 import org.jpos.iso.channel.NACChannel
 import org.jpos.iso.packager.ISO87BPackager
 import java.net.ServerSocket
+import java.net.SocketException
 
-class ISO8583Server(private var host: String, private var port: String) : BasicServer {
-    private val jsonFormatter: Gson = GsonBuilder().setPrettyPrinting().create()
-    private var server: NACChannel? = null
-    override fun getInstance(): Any? {
-        return server
-    }
-
+class ISO8583Server(private var host: String, private var port: String) : BasicServer<NACChannel>() {
     override fun startServer(wait: Boolean) {
-        server = createChannel()
-        server?.configuration = getChannelConfig()
-
-        // Create the ServerSocket
-        val serverSocket = ServerSocket(port.toInt())
-        server?.accept(serverSocket)
-
-        while (true) {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
-                val isoReq: ISOMsg? = server?.receive()
-                Log.d("ISO8583Server", "Received ISO message: $isoReq")
-                eavesdrop(isoReq)
+                server = createChannel()
+                server?.configuration = getChannelConfig()
 
-                val isoReply = isoReq?.let { constructReply(it) }
-                server?.send(isoReply)
-                eavesdrop(isoReply)
-                Log.d("ISO8583Server", "Sent ISO message: $isoReply")
-            } catch (e: Exception) {
-                Log.d("ISO8583Server", "Exception: $e")
-                DebugPanelManager.log("ISO8583Server - connection closed\n")
+                // Create the ServerSocket
+                serverSocket = ServerSocket(port.toInt())
+                DebugPanelManager.log("[ISO8583] Server IP: $host Port: $port")
+                DebugPanelManager.log("-".repeat(50))
                 server?.accept(serverSocket)
+
+                while (serverSocket != null) {
+                    try {
+                        val isoReq: ISOMsg? = server?.receive()
+                        Log.d("ISO8583Server", "Received ISO message: $isoReq")
+                        eavesdrop(isoReq)
+
+                        val isoReply = isoReq?.let { constructReply(it) }
+                        server?.send(isoReply)
+                        eavesdrop(isoReply)
+                        Log.d("ISO8583Server", "Sent ISO message: $isoReply")
+                    } catch (e: Exception) {
+                        Log.d("ISO8583Server", "Exception: $e")
+                        DebugPanelManager.log("[ISO8583] Server - connection closed\n")
+                        server?.accept(serverSocket)
+                    }
+                }
+            } catch (socketException: SocketException) {
+                DebugPanelManager.log("-".repeat(50))
+                DebugPanelManager.log("[ISO8583] Server - ${socketException.message}")
+            } catch (ex: Exception) {
+                DebugPanelManager.log("[ISO8583] Server - Exception: $ex")
             }
         }
     }
@@ -139,5 +146,7 @@ class ISO8583Server(private var host: String, private var port: String) : BasicS
 
     override fun stopServer() {
         server?.disconnect()
+        serverSocket?.close()
+        super.stopServer()
     }
 }

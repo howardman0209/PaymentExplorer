@@ -281,6 +281,24 @@ abstract class BaseActivity : LocalizationActivity() {
         }
     }
 
+    fun yesNoDialog(context: Context, title: String, yesCallback: () -> Unit) {
+        MaterialAlertDialogBuilder(context)
+            .setCancelable(false)
+            .setTitle(title)
+            .setPositiveButton(R.string.button_confirm) { _, _ ->
+                try {
+                    yesCallback.invoke()
+                } catch (ex: Exception) {
+                    Log.e("yesNoDialog", "$ex")
+                }
+                Log.d(TAG, "confirm")
+            }
+            .setNegativeButton(R.string.button_cancel) { _, _ ->
+                Log.d(TAG, "cancel")
+            }
+            .show()
+    }
+
     fun singleInputDialog(context: Context, title: String?, fieldName: String, fieldValue: String? = null, onConfirmCallBack: (editText: String) -> Unit) {
         val dialogBinding: DialogContentSingleInputBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_content_single_input, null, false)
         dialogBinding.tiInputBox1.hint = fieldName

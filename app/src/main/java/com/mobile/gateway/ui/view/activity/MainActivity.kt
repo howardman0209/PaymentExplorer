@@ -3,7 +3,6 @@ package com.mobile.gateway.ui.view.activity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.mobile.gateway.R
 import com.mobile.gateway.databinding.ActivityMainBinding
@@ -29,7 +28,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
 
         DebugPanelManager.display.observe(this) {
             it.getContentIfNotHandled()?.let { visibility ->
-                binding.debugPanel.visibility = if (visibility) View.VISIBLE else View.GONE
+                viewModel.debugPanelOn.set(visibility)
             }
         }
     }
@@ -54,4 +53,12 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_main
+
+    override fun onBackPressed() {
+        if (viewModel.debugPanelOn.get() != true) {
+            yesNoDialog(this, "Leave this app?") {
+                super.onBackPressed()
+            }
+        }
+    }
 }
