@@ -116,9 +116,10 @@
                 android:id="@+id/etRedirectDestination"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:hint="@string/label_redirect_destination"
                 android:importantForAutofill="no"
-                android:maxLines="1"
+                android:singleLine="true"
                 tools:text="http://hostsim.spectra.team:10003" />
 
         </com.google.android.material.textfield.TextInputLayout>
