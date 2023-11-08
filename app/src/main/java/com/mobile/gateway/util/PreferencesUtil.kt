@@ -3,7 +3,8 @@ package com.mobile.gateway.util
 import android.content.Context
 import com.google.gson.Gson
 import com.mobile.gateway.extension.toDataClass
-import com.mobile.gateway.server.iso8583.ISO8583ReplyConfig
+import com.mobile.gateway.server.iso8583.ISO8583ResponseConfig
+import com.mobile.gateway.server.iso8583.ISO8583ServerProfile
 import java.util.Locale
 
 object PreferencesUtil {
@@ -51,15 +52,27 @@ object PreferencesUtil {
         return localPref.getFloat(prefLogFontSize, 10F)
     }
 
-    fun saveISO8583ReplyConfig(context: Context, config: ISO8583ReplyConfig) {
+    fun saveISO8583ResponseConfig(context: Context, config: ISO8583ResponseConfig) {
         val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
         val jsonStr = Gson().toJson(config)
-        localPref?.edit()?.putString(prefISO8583ReplyConfig, jsonStr)?.apply()
+        localPref?.edit()?.putString(prefISO8583ResponseConfig, jsonStr)?.apply()
     }
 
-    fun getISO8583ReplyConfig(context: Context): ISO8583ReplyConfig {
+    fun getISO8583ResponseConfig(context: Context): ISO8583ResponseConfig {
         val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
-        val jsonStr = localPref.getString(prefISO8583ReplyConfig, null)
-        return jsonStr?.toDataClass<ISO8583ReplyConfig>() ?: AssetsUtil.readFile(context, assetPathDefaultISO8385Reply)
+        val jsonStr = localPref.getString(prefISO8583ResponseConfig, null)
+        return jsonStr?.toDataClass<ISO8583ResponseConfig>() ?: AssetsUtil.readFile(context, assetPathDefaultISO8385ResponseConfig)
+    }
+
+    fun saveISO8583ServerProfile(context: Context, config: ISO8583ServerProfile) {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        val jsonStr = Gson().toJson(config)
+        localPref?.edit()?.putString(prefISO8583ServerProfile, jsonStr)?.apply()
+    }
+
+    fun getISO8583ServerProfile(context: Context): ISO8583ServerProfile {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        val jsonStr = localPref.getString(prefISO8583ServerProfile, null)
+        return jsonStr?.toDataClass<ISO8583ServerProfile>() ?: AssetsUtil.readFile(context, assetPathDefaultISO8385ServerProfile)
     }
 }

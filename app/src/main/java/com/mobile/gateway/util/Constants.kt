@@ -38,9 +38,12 @@ const val localeCountryPrefKey = "localeCountry"
 
 //prefKey
 const val prefLogFontSize = "prefLogFontSize"
-const val prefISO8583ReplyConfig = "prefISO8583ReplyConfig"
+const val prefISO8583ResponseConfig = "prefISO8583ResponseConfig"
+const val prefISO8583ServerProfile = "prefISO8583ServerProfile"
 
 //APDU command response code
 const val APDU_RESPONSE_CODE_OK = "9000"
 
-const val assetPathDefaultISO8385Reply = "iso8583/profile_vm/genericApprove.json"
+//default data asset path
+const val assetPathDefaultISO8385ResponseConfig = "iso8583/profile_vm/genericApprove.json"
+const val assetPathDefaultISO8385ServerProfile = "iso8583/serverProfile.json"

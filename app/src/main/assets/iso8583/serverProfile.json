@@ -1,0 +1,44 @@
+{
+  "profiles": [
+    {
+      "profileName": "HostRequestPin",
+      "filters": {
+        "DE04": ".*1899",
+        "DE22": ".*0"
+      },
+      "fields": [
+        4,
+        11,
+        12,
+        13,
+        24,
+        37,
+        38,
+        39,
+        41,
+        63
+      ],
+      "data": {
+        "DE39": "65",
+        "DE63": "1234"
+      }
+    },
+    {
+      "profileName": "GenericApprove",
+      "fields": [
+        4,
+        11,
+        12,
+        13,
+        24,
+        37,
+        38,
+        39,
+        41
+      ],
+      "data": {
+        "DE39": "00"
+      }
+    }
+  ]
+}

@@ -738,7 +738,9 @@
 
     <!--Home-->
     <string name="label_port" translatable="false">Port</string>
+    <string name="label_redirect_destination" translatable="false">Redirect to</string>
     <string name="label_server" translatable="false">Server</string>
     <string name="label_start" translatable="false">Start</string>
     <string name="label_stop" translatable="false">Stop</string>
+    <string name="label_proxy" translatable="false">Proxy</string>
 </resources>

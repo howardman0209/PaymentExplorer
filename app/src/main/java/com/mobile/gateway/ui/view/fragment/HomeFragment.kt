@@ -20,6 +20,7 @@ import com.mobile.gateway.server.ServerDelegate
 import com.mobile.gateway.server.ServerStatus
 import com.mobile.gateway.server.ServerType
 import com.mobile.gateway.server.iso8583.ISO8583Server
+import com.mobile.gateway.server.iso8583.ISO8583ServerConfig
 import com.mobile.gateway.server.restful.HttpServer
 import com.mobile.gateway.ui.base.MVVMFragment
 import com.mobile.gateway.ui.view.activity.SettingActivity
@@ -27,7 +28,7 @@ import com.mobile.gateway.ui.view.viewAdapter.DropDownMenuAdapter
 import com.mobile.gateway.ui.viewModel.HomeViewModel
 import com.mobile.gateway.util.DebugPanelManager
 import com.mobile.gateway.util.PreferencesUtil
-import com.mobile.gateway.util.prefISO8583ReplyConfig
+import com.mobile.gateway.util.prefISO8583ResponseConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.Inet4Address
@@ -96,19 +97,20 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.autoTvCondition1.setAdapter(adapter)
 
         binding.btnConfig.setOnClickListener {
-            when(binding.autoTvCondition1.text.toString().toDataClass<ServerType>()){
+            when (binding.autoTvCondition1.text.toString().toDataClass<ServerType>()) {
                 ServerType.ISO8583 -> {
-                    val replyConfig = PreferencesUtil.getISO8583ReplyConfig(requireContext().applicationContext)
-                    editConfigJson(requireContext(), it, replyConfig, true,
+                    val serverProfile = PreferencesUtil.getISO8583ServerProfile(requireContext().applicationContext)
+                    editConfigJson(requireContext(), it, serverProfile, true,
                         neutralBtn = getString(R.string.button_reset),
                         onNeutralBtnClick = {
-                            PreferencesUtil.clearPreferenceData(requireContext().applicationContext, prefISO8583ReplyConfig)
+                            PreferencesUtil.clearPreferenceData(requireContext().applicationContext, prefISO8583ResponseConfig)
                         }
-                    ) { editedConfig ->
-                        PreferencesUtil.saveISO8583ReplyConfig(requireContext().applicationContext, editedConfig)
+                    ) { editedProfile ->
+                        PreferencesUtil.saveISO8583ServerProfile(requireContext().applicationContext, editedProfile)
                     }
                 }
-                ServerType.RESTFUL ->{
+
+                ServerType.RESTFUL -> {
 
                 }
             }
@@ -134,8 +136,19 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
                         port = binding.etPort.text.toString().toInt()
                     }
                     val selectedServerType: ServerType? = binding.autoTvCondition1.text.toString().toDataClass()
+                    val isProxy = binding.proxyCheckBox.isChecked
+                    val redirectDestination = binding.etRedirectDestination.text.toString()
                     server = when (selectedServerType) {
-                        ServerType.ISO8583 -> ISO8583Server(requireContext().applicationContext, ip, "$port")
+                        ServerType.ISO8583 -> ISO8583Server(
+                            requireContext().applicationContext,
+                            ISO8583ServerConfig(
+                                host = ip,
+                                port = port,
+                                isProxy = isProxy,
+                                redirectDestination = redirectDestination
+                            )
+                        )
+
                         ServerType.RESTFUL -> HttpServer(requireContext().applicationContext, ip, port)
                         else -> null
                     }?.also {

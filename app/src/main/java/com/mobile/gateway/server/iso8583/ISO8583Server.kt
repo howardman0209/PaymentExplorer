@@ -21,27 +21,51 @@ import org.jpos.iso.packager.ISO87BPackager
 import java.net.ServerSocket
 import java.net.SocketException
 
-class ISO8583Server(context: Context, private var host: String, private var port: String) : BasicServer<NACChannel>(context) {
+class ISO8583Server(context: Context, private var serverConfig: ISO8583ServerConfig) : BasicServer<NACChannel>(context) {
     override fun startServer(wait: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 server = createChannel()
-                server?.configuration = getChannelConfig()
+                server?.configuration = getChannelConfig(serverConfig.host, "${serverConfig.port}")
 
                 // Create the ServerSocket
-                serverSocket = ServerSocket(port.toInt())
-                DebugPanelManager.log("[ISO8583] Server IP: $host Port: $port")
+                serverSocket = ServerSocket(serverConfig.port)
+                DebugPanelManager.log("[ISO8583] Server IP: ${serverConfig.host} Port: ${serverConfig.port}")
+
+                val redirectHost = serverConfig.redirectDestination?.substringAfter("//")?.substringBeforeLast(':')
+                val redirectPort = serverConfig.redirectDestination?.substringAfterLast(':')
+                val isProxyMode = serverConfig.isProxy && !redirectHost.isNullOrEmpty() && !redirectPort.isNullOrEmpty()
+                if (isProxyMode) DebugPanelManager.log("[ISO8583] Redirect to host: $redirectHost, port: $redirectPort")
                 DebugPanelManager.log("-".repeat(50))
-                server?.accept(serverSocket)
+
+                server?.accept(serverSocket) // server start listening request
 
                 while (serverSocket != null) {
                     try {
                         val isoReq: ISOMsg? = server?.receive()
                         eavesdrop(isoReq)
 
-                        val isoReply = isoReq?.let { constructReply(it) }
-                        server?.send(isoReply)
-                        eavesdrop(isoReply)
+                        // two option here:
+                        // 1. construct iso8583 reply and send
+                        // 2. route iso8583 request as a proxy to a configurable destination (Default: PyHostSim)
+                        if (isProxyMode) {
+                            val serverB = createChannel()
+                            serverB.configuration = getChannelConfig(redirectHost!!, redirectPort!!) // IDE cannot cast boolean -> force not null here
+                            serverB.connect()
+                            serverB.send(isoReq)
+
+                            val incoming = try {
+                                serverB.receive()
+                            } catch (e: Exception) {
+                                null
+                            }
+                            server?.send(incoming)
+                            eavesdrop(incoming)
+                        } else {
+                            val isoReply = isoReq?.let { constructReply(it) }
+                            server?.send(isoReply)
+                            eavesdrop(isoReply)
+                        }
                     } catch (e: Exception) {
                         Log.d("ISO8583Server", "[In while loop] Exception: $e")
 //                        DebugPanelManager.log("[ISO8583] Server - connection closed\n")
@@ -96,18 +120,41 @@ class ISO8583Server(context: Context, private var host: String, private var port
     private fun constructReply(isoReq: ISOMsg): ISOMsg {
         val isoReply = ISOMsg()
         isoReply.mti = (isoReq.mti.toInt() + 10).toString().padStart(4, '0')
-        val defaultReply = PreferencesUtil.getISO8583ReplyConfig(context)
-        Log.d("ISO8583Reply", "$defaultReply")
-        Log.d("ISO8583Reply", "fields: ${defaultReply.fields}")
-        val replyFields = defaultReply.fields
+
+        val serverProfile = PreferencesUtil.getISO8583ServerProfile(context)
+        Log.d("ISO8583Reply", "$serverProfile")
+
+        // check any match profile
+        val matchProfile = serverProfile.profiles.find { responseConfig ->
+            responseConfig.filters?.entries?.all {
+                if (it.key.contains("mti", ignoreCase = true)) {
+                    Regex(it.value).matches(isoReq.mti)
+                } else {
+                    val fieldNo = it.key.drop(2).toInt() //"DE22" -> 22
+                    val value = isoReq.getBytes(fieldNo).toHexString().hexToAscii()
+                    Log.d("ISO8583Reply", "check {${it.key}, ${it.value}}  [$fieldNo]=$value")
+                    Regex(it.value).matches(isoReq.getBytes(fieldNo).toHexString().hexToAscii())
+                }
+            } == true
+        }
+
+        // get default profile
+        val defaultProfile = serverProfile.profiles.find { responseConfig ->
+            responseConfig.filters == null
+        } ?: throw Exception("Invalid Server Config")
+
+        val replyProfile = (matchProfile ?: defaultProfile)
+        Log.d("ISO8583Reply", "replyProfile: ${jsonFormatter.toJson(replyProfile)}")
+        val replyFields = replyProfile.fields
+        Log.d("ISO8583Reply", "replyFields: $replyFields")
         val requestFields = ISO8583Util.getFieldsFromHex(isoReq.pack().toHexString().uppercase().substring(4, 20))
         replyFields.forEach { fieldNo ->
             if (requestFields.contains(fieldNo)) {
                 isoReply.set(fieldNo, isoReq.getBytes(fieldNo))
             }
 
-            if (defaultReply.data?.contains("DE$fieldNo") == true) {
-                val value = defaultReply.data["DE$fieldNo"]
+            if (replyProfile.data?.contains("DE$fieldNo") == true) {
+                val value = replyProfile.data["DE$fieldNo"]
                 Log.d("ISO8583Reply", "override - field[$fieldNo]: $value")
                 isoReply.set(fieldNo, value?.toByteArray())
             } else {
@@ -131,6 +178,7 @@ class ISO8583Server(context: Context, private var host: String, private var port
                 }
             }
         }
+
         return isoReply
     }
 
@@ -148,7 +196,7 @@ class ISO8583Server(context: Context, private var host: String, private var port
         return tpdu.hexToByteArray()
     }
 
-    private fun getChannelConfig(): SimpleConfiguration {
+    private fun getChannelConfig(host: String, port: String): SimpleConfiguration {
         val config = SimpleConfiguration()
         config.put("host", host)
         config.put("port", port)

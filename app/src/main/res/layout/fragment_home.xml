@@ -90,6 +90,39 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/proxyCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_default"
+            android:enabled="@{!viewModel.serverStarted &amp;&amp; !autoTvCondition1.text.toString().empty}"
+            android:text="@string/label_proxy"
+            android:textAppearance="?textAppearanceSubtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCondition1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiRedirectDestination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_default"
+            android:enabled="@{!viewModel.serverStarted &amp;&amp; !autoTvCondition1.text.toString().empty &amp;&amp; proxyCheckBox.checked}"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/btnConfig"
+            app:layout_constraintStart_toEndOf="@+id/proxyCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/tilCondition1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRedirectDestination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_redirect_destination"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                tools:text="http://hostsim.spectra.team:10003" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnConfig"
             android:layout_width="wrap_content"
@@ -97,7 +130,7 @@
             android:layout_margin="@dimen/space_default"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:enabled="@{!autoTvCondition1.text.toString().empty}"
+            android:enabled="@{!autoTvCondition1.text.toString().empty &amp;&amp; !proxyCheckBox.checked}"
             android:focusable="true"
             android:padding="@dimen/space_default"
             android:src="@drawable/ic_baseline_settings"
@@ -110,13 +143,13 @@
             style="@style/Widget.mobile.gateway.Button.TextButton.Secondary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/space_default"
+            android:layout_margin="@dimen/space_default"
             android:enabled="@{!autoTvCondition1.text.toString().empty}"
             android:text="@{viewModel.serverStarted? @string/label_stop : @string/label_start}"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnConfig"
+            app:layout_constraintTop_toBottomOf="@+id/tiRedirectDestination"
             tools:text="Start" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
