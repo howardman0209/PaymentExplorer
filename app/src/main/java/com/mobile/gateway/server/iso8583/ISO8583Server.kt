@@ -26,10 +26,10 @@ class ISO8583Server(context: Context, private var serverConfig: ISO8583ServerCon
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 server = createChannel()
-                server?.configuration = getChannelConfig(serverConfig.host, "${serverConfig.port}")
+                server?.configuration = getChannelConfig(serverConfig.host, serverConfig.port)
 
                 // Create the ServerSocket
-                serverSocket = ServerSocket(serverConfig.port)
+                serverSocket = ServerSocket(serverConfig.port.toInt())
                 DebugPanelManager.log("[ISO8583] Server IP: ${serverConfig.host} Port: ${serverConfig.port}")
 
                 val redirectHost = serverConfig.redirectDestination?.substringAfter("//")?.substringBeforeLast(':')

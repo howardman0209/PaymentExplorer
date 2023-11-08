@@ -36,13 +36,14 @@ import java.net.Inet4Address
 class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
     private var server: ServerDelegate? = null
     private lateinit var ip: String
-    private var port = 8080
+    private lateinit var port: String
     private var isDebug = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("HomeFragment", "onCreate")
         ip = getWifiIpAddress(requireContext().applicationContext) ?: "127.0.0.1"
+        port = PreferencesUtil.getDefaultPortNo(requireContext().applicationContext)
         viewModel.ipAddress.set("IP: $ip")
     }
 
@@ -131,9 +132,9 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
 
                 else -> {
                     if (binding.etPort.text.isNullOrEmpty()) {
-                        binding.etPort.setText("$port")
+                        binding.etPort.setText(port)
                     } else {
-                        port = binding.etPort.text.toString().toInt()
+                        port = binding.etPort.text.toString()
                     }
                     val selectedServerType: ServerType? = binding.autoTvCondition1.text.toString().toDataClass()
                     val isProxy = binding.proxyCheckBox.isChecked

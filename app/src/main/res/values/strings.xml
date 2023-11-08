@@ -730,6 +730,7 @@
 
     <!--Settings-->
     <string name="label_setting_log_font_size" translatable="false">Log font setting</string>
+    <string name="label_setting_default_port" translatable="false">Default port</string>
     <!--Font Setting-->
     <string name="label_font_size" translatable="false">Font Size</string>
     <string name="label_log_font_size_min" translatable="false">10sp</string>

@@ -22,11 +22,11 @@ import kotlinx.coroutines.launch
 import java.net.SocketException
 import java.util.concurrent.TimeUnit
 
-class HttpServer(context: Context, private val ip: String, private val port: Int) : BasicServer<NettyApplicationEngine>(context) {
+class HttpServer(context: Context, private val ip: String, private val port: String) : BasicServer<NettyApplicationEngine>(context) {
     override fun startServer(wait: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                embeddedServer(Netty, port) {
+                embeddedServer(Netty, port.toInt()) {
                     install(ContentNegotiation) {
                         gson {
 

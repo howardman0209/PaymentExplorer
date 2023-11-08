@@ -75,4 +75,14 @@ object PreferencesUtil {
         val jsonStr = localPref.getString(prefISO8583ServerProfile, null)
         return jsonStr?.toDataClass<ISO8583ServerProfile>() ?: AssetsUtil.readFile(context, assetPathDefaultISO8385ServerProfile)
     }
+
+    fun saveDefaultPortNo(context: Context, portNo: String) {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        localPref?.edit()?.putString(prefDefaultPortNo, portNo)?.apply()
+    }
+
+    fun getDefaultPortNo(context: Context): String {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        return localPref.getString(prefDefaultPortNo, "10004") ?: "10004"
+    }
 }

@@ -46,6 +46,17 @@ class SettingActivity : MVVMActivity<SettingViewModel, ActivitySettingBinding>()
                 }
                 .show()
         }
+
+        binding.settingDefaultPort.setOnClickListener {
+            singleInputDialog(
+                context = this,
+                title = "Enter default port no.",
+                fieldName = "port no.",
+                fieldValue = PreferencesUtil.getDefaultPortNo(applicationContext)
+            ) {
+                PreferencesUtil.saveDefaultPortNo(applicationContext, it)
+            }
+        }
     }
 
     override fun getViewModelInstance(): SettingViewModel = ViewModelProvider(this)[SettingViewModel::class.java]

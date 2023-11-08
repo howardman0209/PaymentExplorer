@@ -48,6 +48,14 @@
                 android:text="@string/label_setting_log_font_size"
                 app:drawableStartCompat="@drawable/ic_baseline_terminal" />
 
+            <TextView
+                android:id="@+id/settingDefaultPort"
+                style="@style/Widget.mobile.gateway.List.SingleLineItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_setting_default_port"
+                app:drawableStartCompat="@drawable/ic_baseline_router" />
+
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
