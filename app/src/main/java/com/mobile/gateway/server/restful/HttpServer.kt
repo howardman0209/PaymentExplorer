@@ -1,5 +1,6 @@
 package com.mobile.gateway.server.restful
 
+import android.content.Context
 import android.util.Log
 import com.mobile.gateway.model.PostMessageRequest
 import com.mobile.gateway.server.BasicServer
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 import java.net.SocketException
 import java.util.concurrent.TimeUnit
 
-class HttpServer(private val ip: String, private val port: Int) : BasicServer<NettyApplicationEngine>() {
+class HttpServer(context: Context, private val ip: String, private val port: Int) : BasicServer<NettyApplicationEngine>(context) {
     override fun startServer(wait: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -35,7 +36,7 @@ class HttpServer(private val ip: String, private val port: Int) : BasicServer<Ne
                     routing {
                         post("/message") {
                             val requestData = call.receive<PostMessageRequest>()
-                            DebugPanelManager.log("[RESTFUL] Server - incoming request: /message \n- request: $requestData")
+                            DebugPanelManager.log("[RESTFUL] Server - incoming request: /message - request: $requestData")
                             call.respond(mapOf("result" to "success"))
                         }
                     }

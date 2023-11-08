@@ -26,6 +26,8 @@ import com.mobile.gateway.ui.view.activity.SettingActivity
 import com.mobile.gateway.ui.view.viewAdapter.DropDownMenuAdapter
 import com.mobile.gateway.ui.viewModel.HomeViewModel
 import com.mobile.gateway.util.DebugPanelManager
+import com.mobile.gateway.util.PreferencesUtil
+import com.mobile.gateway.util.prefISO8583ReplyConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.Inet4Address
@@ -83,7 +85,7 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         DebugPanelManager.log("HomeFragment - onViewCreated")
 
         binding.btnCopy.setOnClickListener {
-            copyTextToClipboard(requireContext(), ip, "IP")
+            copyTextToClipboard(requireContext(), "http://$ip:$port", "IP")
         }
 
         val adapter = DropDownMenuAdapter(
@@ -93,6 +95,24 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         )
         binding.autoTvCondition1.setAdapter(adapter)
 
+        binding.btnConfig.setOnClickListener {
+            when(binding.autoTvCondition1.text.toString().toDataClass<ServerType>()){
+                ServerType.ISO8583 -> {
+                    val replyConfig = PreferencesUtil.getISO8583ReplyConfig(requireContext().applicationContext)
+                    editConfigJson(requireContext(), it, replyConfig, true,
+                        neutralBtn = getString(R.string.button_reset),
+                        onNeutralBtnClick = {
+                            PreferencesUtil.clearPreferenceData(requireContext().applicationContext, prefISO8583ReplyConfig)
+                        }
+                    ) { editedConfig ->
+                        PreferencesUtil.saveISO8583ReplyConfig(requireContext().applicationContext, editedConfig)
+                    }
+                }
+                ServerType.RESTFUL ->{
+
+                }
+            }
+        }
 
         binding.btnOnOff.setOnClickListener {
             when (server?.getStatus()) {
@@ -115,8 +135,8 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
                     }
                     val selectedServerType: ServerType? = binding.autoTvCondition1.text.toString().toDataClass()
                     server = when (selectedServerType) {
-                        ServerType.ISO8583 -> ISO8583Server(ip, "$port")
-                        ServerType.RESTFUL -> HttpServer(ip, port)
+                        ServerType.ISO8583 -> ISO8583Server(requireContext().applicationContext, ip, "$port")
+                        ServerType.RESTFUL -> HttpServer(requireContext().applicationContext, ip, port)
                         else -> null
                     }?.also {
                         it.startServer(true)

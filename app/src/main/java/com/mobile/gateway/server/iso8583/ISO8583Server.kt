@@ -1,5 +1,6 @@
 package com.mobile.gateway.server.iso8583
 
+import android.content.Context
 import android.util.Log
 import com.mobile.gateway.extension.hexToAscii
 import com.mobile.gateway.extension.hexToByteArray
@@ -8,6 +9,7 @@ import com.mobile.gateway.extension.toHexString
 import com.mobile.gateway.server.BasicServer
 import com.mobile.gateway.util.DebugPanelManager
 import com.mobile.gateway.util.ISO8583Util
+import com.mobile.gateway.util.PreferencesUtil
 import com.mobile.gateway.util.TlvUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +21,7 @@ import org.jpos.iso.packager.ISO87BPackager
 import java.net.ServerSocket
 import java.net.SocketException
 
-class ISO8583Server(private var host: String, private var port: String) : BasicServer<NACChannel>() {
+class ISO8583Server(context: Context, private var host: String, private var port: String) : BasicServer<NACChannel>(context) {
     override fun startServer(wait: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -35,18 +37,17 @@ class ISO8583Server(private var host: String, private var port: String) : BasicS
                 while (serverSocket != null) {
                     try {
                         val isoReq: ISOMsg? = server?.receive()
-                        Log.d("ISO8583Server", "Received ISO message: $isoReq")
                         eavesdrop(isoReq)
 
                         val isoReply = isoReq?.let { constructReply(it) }
                         server?.send(isoReply)
                         eavesdrop(isoReply)
-                        Log.d("ISO8583Server", "Sent ISO message: $isoReply")
                     } catch (e: Exception) {
-                        Log.d("ISO8583Server", "Exception: $e")
-                        DebugPanelManager.log("[ISO8583] Server - connection closed\n")
+                        Log.d("ISO8583Server", "[In while loop] Exception: $e")
+//                        DebugPanelManager.log("[ISO8583] Server - connection closed\n")
                         server?.accept(serverSocket)
                     }
+
                 }
             } catch (socketException: SocketException) {
                 DebugPanelManager.log("-".repeat(50))
@@ -95,28 +96,38 @@ class ISO8583Server(private var host: String, private var port: String) : BasicS
     private fun constructReply(isoReq: ISOMsg): ISOMsg {
         val isoReply = ISOMsg()
         isoReply.mti = (isoReq.mti.toInt() + 10).toString().padStart(4, '0')
-        val replyFields = listOf(4, 11, 12, 13, 24, 37, 38, 39, 41)
+        val defaultReply = PreferencesUtil.getISO8583ReplyConfig(context)
+        Log.d("ISO8583Reply", "$defaultReply")
+        Log.d("ISO8583Reply", "fields: ${defaultReply.fields}")
+        val replyFields = defaultReply.fields
         val requestFields = ISO8583Util.getFieldsFromHex(isoReq.pack().toHexString().uppercase().substring(4, 20))
-        replyFields.forEach {
-            if (requestFields.contains(it)) {
-                isoReply.set(it, isoReq.getBytes(it))
+        replyFields.forEach { fieldNo ->
+            if (requestFields.contains(fieldNo)) {
+                isoReply.set(fieldNo, isoReq.getBytes(fieldNo))
             }
-            val currentTimestamp = ISO8583Util.getTimeStamp()
-            when (it) {
-                12, 38 -> {
-                    isoReply.set(it, currentTimestamp.toDateString("hhmmss").toByteArray())
-                }
 
-                13 -> {
-                    isoReply.set(it, currentTimestamp.toDateString("MMdd").toByteArray())
-                }
+            if (defaultReply.data?.contains("DE$fieldNo") == true) {
+                val value = defaultReply.data["DE$fieldNo"]
+                Log.d("ISO8583Reply", "override - field[$fieldNo]: $value")
+                isoReply.set(fieldNo, value?.toByteArray())
+            } else {
+                val currentTimestamp = ISO8583Util.getTimeStamp()
+                when (fieldNo) {
+                    12, 38 -> {
+                        isoReply.set(fieldNo, currentTimestamp.toDateString("hhmmss").toByteArray())
+                    }
 
-                37 -> {
-                    isoReply.set(it, currentTimestamp.toDateString("YYMMddhhmmss").toByteArray())
-                }
+                    13 -> {
+                        isoReply.set(fieldNo, currentTimestamp.toDateString("MMdd").toByteArray())
+                    }
 
-                39 -> {
-                    isoReply.set(it, "00".toByteArray())
+                    37 -> {
+                        isoReply.set(fieldNo, currentTimestamp.toDateString("YYMMddhhmmss").toByteArray())
+                    }
+
+                    39 -> {
+                        isoReply.set(fieldNo, "00".toByteArray())
+                    }
                 }
             }
         }

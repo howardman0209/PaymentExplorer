@@ -1,6 +1,9 @@
 package com.mobile.gateway.util
 
 import android.content.Context
+import com.google.gson.Gson
+import com.mobile.gateway.extension.toDataClass
+import com.mobile.gateway.server.iso8583.ISO8583ReplyConfig
 import java.util.Locale
 
 object PreferencesUtil {
@@ -46,5 +49,17 @@ object PreferencesUtil {
     fun getLogFontSize(context: Context): Float {
         val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
         return localPref.getFloat(prefLogFontSize, 10F)
+    }
+
+    fun saveISO8583ReplyConfig(context: Context, config: ISO8583ReplyConfig) {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        val jsonStr = Gson().toJson(config)
+        localPref?.edit()?.putString(prefISO8583ReplyConfig, jsonStr)?.apply()
+    }
+
+    fun getISO8583ReplyConfig(context: Context): ISO8583ReplyConfig {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        val jsonStr = localPref.getString(prefISO8583ReplyConfig, null)
+        return jsonStr?.toDataClass<ISO8583ReplyConfig>() ?: AssetsUtil.readFile(context, assetPathDefaultISO8385Reply)
     }
 }

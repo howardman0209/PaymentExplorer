@@ -1,11 +1,12 @@
 package com.mobile.gateway.server
 
 import android.util.Log
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.net.ServerSocket
 
-abstract class BasicServer<T> : ServerDelegate {
+abstract class BasicServer<T>(val context: Context) : ServerDelegate {
     val jsonFormatter: Gson = GsonBuilder().setPrettyPrinting().create()
     var serverSocket: ServerSocket? = null
     open var server: T? = null
