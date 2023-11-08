@@ -48,3 +48,7 @@ const val APDU_RESPONSE_CODE_OK = "9000"
 //default data asset path
 const val assetPathDefaultISO8385ResponseConfig = "iso8583/profile_vm/genericApprove.json"
 const val assetPathDefaultISO8385ServerProfile = "iso8583/serverProfile.json"
+
+//room db table name
+const val roomDbNameMobileGatewayDb = "mobileGateway_db_v1"
+const val roomDbTableNamePendingLog = "roomDbTableNamePendingLog"

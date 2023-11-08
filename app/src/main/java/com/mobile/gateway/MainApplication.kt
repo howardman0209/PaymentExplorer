@@ -8,7 +8,10 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate
+import com.mobile.gateway.util.DebugPanelManager
 import com.mobile.gateway.util.LIFECYCLE
 import com.mobile.gateway.util.PreferencesUtil
 
@@ -17,6 +20,14 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
 
     companion object {
         var activitiesAlive = ArrayList<String>()
+
+       inline fun <reified T: RoomDatabase> getDatabase(
+            context: Context,
+            databaseName: String,
+        ): T {
+            val dbBuilder = Room.databaseBuilder(context, T::class.java, databaseName).fallbackToDestructiveMigration()
+            return dbBuilder.build()
+        }
     }
 
     private var currentActiveActivity: Activity? = null
@@ -27,6 +38,7 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
         Log.d(LIFECYCLE, "app onCreate")
         registerActivityLifecycleCallbacks(this)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        DebugPanelManager.initDebugPanel(applicationContext)
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

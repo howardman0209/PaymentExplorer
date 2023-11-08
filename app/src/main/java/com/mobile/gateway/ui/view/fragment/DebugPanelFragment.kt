@@ -170,8 +170,7 @@ class DebugPanelFragment : MVVMFragment<DebugPanelViewModel, FragmentDebugPanelB
     }
 
     private fun printLogOnScreen(logStr: String) {
-        val vlog = String.format("%s %s\n", viewModel.getCurrentDateTime(true), logStr)
-        binding.logPanel.append(vlog)
+        binding.logPanel.append("$logStr\n")
         Log.d("LogPanel", logStr)
         binding.logPanel.post {
             scrollToBottom()
@@ -195,11 +194,14 @@ class DebugPanelFragment : MVVMFragment<DebugPanelViewModel, FragmentDebugPanelB
         super.onResume()
         Log.d("DebugPanelFragment", "onResume")
         updateLayout()
+        DebugPanelManager.isForeground = true
+        DebugPanelManager.logPendingMessage()
     }
 
     override fun onPause() {
         super.onPause()
         Log.d("DebugPanelFragment", "onPause")
+        DebugPanelManager.isForeground = false
     }
 
     override fun onDestroy() {

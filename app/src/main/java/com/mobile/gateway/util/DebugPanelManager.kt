@@ -1,13 +1,19 @@
 package com.mobile.gateway.util
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.mobile.gateway.extension.toDateString
 import com.mobile.gateway.handler.Event
+import com.mobile.gateway.model.PendingLog
+import com.mobile.gateway.room.PendingLogRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object DebugPanelManager {
+    private lateinit var pendingLogRepository: PendingLogRepository
+    var isForeground = true
     private val _messageToLog = MutableLiveData<Event<String>>()
     val messageToLog: LiveData<Event<String>>
         get() = _messageToLog
@@ -16,9 +22,37 @@ object DebugPanelManager {
     val display: LiveData<Event<Boolean>>
         get() = _display
 
+    fun initDebugPanel(context: Context) {
+        pendingLogRepository = PendingLogRepository.getInstance(context)
+    }
+
     fun log(message: String?) {
-        CoroutineScope(Dispatchers.Main).launch {
-            _messageToLog.value = Event(message ?: "null")
+        if (isForeground) {
+            CoroutineScope(Dispatchers.Main).launch {
+                val timestamp = System.currentTimeMillis().toDateString(DATE_TIME_DISPLAY_PATTERN_SO_SHORT)
+                _messageToLog.value = Event("$timestamp ${message ?: "null"}")
+            }
+        } else {
+            if (::pendingLogRepository.isInitialized) {
+                pendingLogRepository.savePendingLog(
+                    PendingLog(
+                        timestamp = System.currentTimeMillis(),
+                        message = message ?: "null"
+                    )
+                )
+            }
+        }
+    }
+
+    fun logPendingMessage() {
+        pendingLogRepository.pendingLogList.value?.forEach { pendingMsg ->
+            CoroutineScope(Dispatchers.Main).launch {
+                val timestamp = pendingMsg.timestamp.toDateString(DATE_TIME_DISPLAY_PATTERN_SO_SHORT)
+                _messageToLog.value = Event("$timestamp ${pendingMsg.message}")
+            }
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            pendingLogRepository.removeAllPendingLog()
         }
     }
 
