@@ -16,7 +16,6 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "onCreate")
-        DebugPanelManager.log("MainActivity - onCreate")
         setSupportActionBar(binding.topAppBar)
 
         setUpDebugPanel()

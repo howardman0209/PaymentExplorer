@@ -84,7 +84,6 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DebugPanelManager.log("HomeFragment - onViewCreated")
 
         binding.btnCopy.setOnClickListener {
             copyTextToClipboard(requireContext(), "http://$ip:$port", "IP")

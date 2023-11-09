@@ -24,6 +24,7 @@ object DebugPanelManager {
 
     fun initDebugPanel(context: Context) {
         pendingLogRepository = PendingLogRepository.getInstance(context)
+        log("Debug log init successfully")
     }
 
     fun log(message: String?) {
