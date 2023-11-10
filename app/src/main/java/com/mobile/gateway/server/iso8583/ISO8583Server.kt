@@ -69,9 +69,9 @@ class ISO8583Server(context: Context, private var serverConfig: ISO8583ServerCon
                     } catch (e: Exception) {
                         Log.d("ISO8583Server", "[In while loop] Exception: $e")
 //                        DebugPanelManager.log("[ISO8583] Server - connection closed\n")
+                    } finally {
                         server?.accept(serverSocket)
                     }
-
                 }
             } catch (socketException: SocketException) {
                 DebugPanelManager.log("-".repeat(50))

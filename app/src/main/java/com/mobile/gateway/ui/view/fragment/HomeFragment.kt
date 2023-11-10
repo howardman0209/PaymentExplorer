@@ -47,23 +47,23 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         viewModel.ipAddress.set("IP: $ip")
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.tools, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.d("onOptionsItemSelected", "item: $item")
         when (item.itemId) {
             R.id.action_test -> {
-                viewModel.sendRequest("http://$ip:$port", "message")
-                viewModel.sendRequestWithRetrofit("http://$ip:$port/")
+//                viewModel.sendRequest("http://$ip:$port", "message")
+//                viewModel.sendRequestWithRetrofit("http://$ip:$port/")
 //                val test = ""
 //                LongLogUtil.debug("@@", "test: $test")
 //                DebugPanelManager.log("test: $test")
@@ -72,6 +72,14 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
             R.id.tool_logcat -> {
                 isDebug = !isDebug
                 DebugPanelManager.show(isDebug)
+            }
+
+            R.id.tool_magnify -> {
+                DebugPanelManager.logPanelHeightRatio.value = DebugPanelManager.logPanelHeightRatio.value?.plus(0.01F)
+            }
+
+            R.id.tool_minimize -> {
+                DebugPanelManager.logPanelHeightRatio.value = DebugPanelManager.logPanelHeightRatio.value?.minus(0.01F)
             }
 
             R.id.action_settings -> {

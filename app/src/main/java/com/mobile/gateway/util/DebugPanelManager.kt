@@ -22,6 +22,8 @@ object DebugPanelManager {
     val display: LiveData<Event<Boolean>>
         get() = _display
 
+    val logPanelHeightRatio = MutableLiveData(1F)
+
     fun initDebugPanel(context: Context) {
         pendingLogRepository = PendingLogRepository.getInstance(context)
         log("Debug log init successfully")
