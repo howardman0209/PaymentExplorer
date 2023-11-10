@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.mobile.gateway.server.ServerType" />
+
         <variable
             name="view"
             type="com.mobile.gateway.ui.view.fragment.HomeFragment" />
@@ -12,6 +14,7 @@
         <variable
             name="viewModel"
             type="com.mobile.gateway.ui.viewModel.HomeViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,10 +95,11 @@
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/proxyCheckBox"
+            showIf="@{autoTvCondition1.text.toString().equalsIgnoreCase(ServerType.ISO8583.name)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_default"
-            android:enabled="@{!viewModel.serverStarted &amp;&amp; !autoTvCondition1.text.toString().empty}"
+            android:enabled="@{!viewModel.serverStarted}"
             android:text="@string/label_proxy"
             android:textAppearance="?textAppearanceSubtitle1"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,6 +107,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiRedirectDestination"
+            showIf="@{autoTvCondition1.text.toString().equalsIgnoreCase(ServerType.ISO8583.name)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_default"
@@ -150,7 +155,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tiRedirectDestination"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfig"
             tools:text="Start" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

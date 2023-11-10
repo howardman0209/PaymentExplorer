@@ -2,12 +2,7 @@ package com.mobile.gateway.ui.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mobile.gateway.util.DATE_TIME_DISPLAY_PATTERN_FULL
-import com.mobile.gateway.util.DATE_TIME_DISPLAY_PATTERN_SO_SHORT
 import io.reactivex.disposables.Disposable
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
 
 open class BaseViewModel : ViewModel() {
@@ -20,11 +15,6 @@ open class BaseViewModel : ViewModel() {
     }
 
     fun getDisposableList(): List<Disposable> = disposableList
-
-    fun getCurrentDateTime(isShort: Boolean = false): String? {
-        val formatter = if (isShort) DateTimeFormatter.ofPattern(DATE_TIME_DISPLAY_PATTERN_SO_SHORT) else DateTimeFormatter.ofPattern(DATE_TIME_DISPLAY_PATTERN_FULL)
-        return LocalDateTime.now().format(formatter)
-    }
 
     fun getCurrentTimestamp(): Long {
         return (System.currentTimeMillis() / 1000)
