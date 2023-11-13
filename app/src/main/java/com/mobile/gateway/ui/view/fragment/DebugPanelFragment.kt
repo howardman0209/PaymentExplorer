@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.marginBottom
 import com.mobile.gateway.R
 import com.mobile.gateway.databinding.FragmentDebugPanelBinding
@@ -26,6 +27,19 @@ class DebugPanelFragment : MVVMFragment<DebugPanelViewModel, FragmentDebugPanelB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        DebugPanelManager.debugPanelState.observe(viewLifecycleOwner) {
+            val ratio = when (it) {
+                DebugPanelManager.DebugPanelState.HALF_EXPANDED -> 0.5F
+                DebugPanelManager.DebugPanelState.EXPANDED -> 1.0F
+                else -> 0F
+            }
+
+            (binding.logPanelContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
+                matchConstraintPercentHeight = ratio
+                binding.logPanelContainer.layoutParams = this
+            }
+        }
 
         DebugPanelManager.messageToLog.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { message -> // Only proceed if the event has never been handled

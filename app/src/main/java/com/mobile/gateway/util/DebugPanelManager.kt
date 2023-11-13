@@ -12,6 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object DebugPanelManager {
+    enum class DebugPanelState {
+        EXPANDED,
+        HALF_EXPANDED,
+        COLLAPSED
+    }
+
     private lateinit var pendingLogRepository: PendingLogRepository
     var isForeground = true
     private val _messageToLog = MutableLiveData<Event<String>>()
@@ -21,6 +27,8 @@ object DebugPanelManager {
     private val _display = MutableLiveData<Event<Boolean>>()
     val display: LiveData<Event<Boolean>>
         get() = _display
+
+    val debugPanelState = MutableLiveData<DebugPanelState>(DebugPanelState.HALF_EXPANDED)
 
     fun initDebugPanel(context: Context) {
         pendingLogRepository = PendingLogRepository.getInstance(context)
