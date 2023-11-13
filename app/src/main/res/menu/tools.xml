@@ -16,19 +16,6 @@
     <item
         android:id="@+id/tool_logcat"
         android:icon="@drawable/ic_baseline_terminal"
-        android:orderInCategory="3"
         android:title="@string/label_logcat"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/tool_magnify"
-        android:icon="@drawable/baseline_keyboard_arrow_up"
-        android:title="@string/label_magnify"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/tool_minimize"
-        android:icon="@drawable/baseline_keyboard_arrow_down"
-        android:title="@string/label_minimize"
         app:showAsAction="ifRoom" />
 </menu>

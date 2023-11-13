@@ -11,8 +11,6 @@
     <string name="other">Other</string>
     <string name="label_loading">Loading…</string>
     <string name="label_logcat" translatable="false">Logcat</string>
-    <string name="label_magnify" translatable="false">Magnify</string>
-    <string name="label_minimize" translatable="false">Minimize</string>
     <string name="label_info" translatable="false">Information</string>
 
     <!--    bottom navigation tab label-->
