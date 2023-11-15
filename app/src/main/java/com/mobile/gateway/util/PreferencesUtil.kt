@@ -3,6 +3,7 @@ package com.mobile.gateway.util
 import android.content.Context
 import com.google.gson.Gson
 import com.mobile.gateway.extension.toDataClass
+import com.mobile.gateway.model.Tool
 import com.mobile.gateway.server.iso8583.ISO8583ResponseConfig
 import com.mobile.gateway.server.iso8583.ISO8583ServerProfile
 import java.util.Locale
@@ -84,5 +85,16 @@ object PreferencesUtil {
     fun getDefaultPortNo(context: Context): String {
         val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
         return localPref.getString(prefDefaultPortNo, "10004") ?: "10004"
+    }
+
+    fun saveLastUsedTool(context: Context, tool: Tool) {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        localPref?.edit()?.putInt(prefLastUsedTool, tool.id)?.apply()
+    }
+
+    fun getLastUsedTool(context: Context): Tool {
+        val localPref = context.getSharedPreferences(localPrefFileName, Context.MODE_PRIVATE)
+        val id = localPref.getInt(prefLastUsedTool, Tool.HOST.id)
+        return Tool.getById(id)
     }
 }

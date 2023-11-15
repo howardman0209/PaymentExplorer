@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.mobile.gateway.R
-import com.mobile.gateway.databinding.FragmentHomeBinding
+import com.mobile.gateway.databinding.FragmentHostBinding
 import com.mobile.gateway.extension.toDataClass
 import com.mobile.gateway.server.ServerDelegate
 import com.mobile.gateway.server.ServerStatus
@@ -18,21 +18,21 @@ import com.mobile.gateway.server.iso8583.ISO8583ServerConfig
 import com.mobile.gateway.server.restful.HttpServer
 import com.mobile.gateway.ui.base.MVVMFragment
 import com.mobile.gateway.ui.view.viewAdapter.DropDownMenuAdapter
-import com.mobile.gateway.ui.viewModel.HomeViewModel
+import com.mobile.gateway.ui.viewModel.HostViewModel
 import com.mobile.gateway.util.PreferencesUtil
 import com.mobile.gateway.util.prefISO8583ResponseConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.Inet4Address
 
-class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
+class HostFragment : MVVMFragment<HostViewModel, FragmentHostBinding>() {
     private var server: ServerDelegate? = null
     private lateinit var ip: String
     private lateinit var port: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("HomeFragment", "onCreate")
+        Log.d("HostFragment", "onCreate")
         ip = getWifiIpAddress(requireContext().applicationContext) ?: "127.0.0.1"
         port = PreferencesUtil.getDefaultPortNo(requireContext().applicationContext)
         viewModel.ipAddress.set("IP: $ip")
@@ -141,14 +141,14 @@ class HomeFragment : MVVMFragment<HomeViewModel, FragmentHomeBinding>() {
         return null
     }
 
-    override fun getViewModelInstance(): HomeViewModel = HomeViewModel()
+    override fun getViewModelInstance(): HostViewModel = HostViewModel()
 
     override fun setBindingData() {
         binding.viewModel = viewModel
         binding.view = this
     }
 
-    override fun getLayoutResId(): Int = R.layout.fragment_home
+    override fun getLayoutResId(): Int = R.layout.fragment_host
 
-    override fun screenName(): String = "Home"
+    override fun screenName(): String = "HostFragment"
 }

@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate
+import com.mobile.gateway.model.Category
+import com.mobile.gateway.model.NavigationMenuData
+import com.mobile.gateway.model.Tool
 import com.mobile.gateway.util.DebugPanelManager
 import com.mobile.gateway.util.LIFECYCLE
 import com.mobile.gateway.util.PreferencesUtil
@@ -21,12 +24,38 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
     companion object {
         var activitiesAlive = ArrayList<String>()
 
-       inline fun <reified T: RoomDatabase> getDatabase(
+        inline fun <reified T : RoomDatabase> getDatabase(
             context: Context,
             databaseName: String,
         ): T {
             val dbBuilder = Room.databaseBuilder(context, T::class.java, databaseName).fallbackToDestructiveMigration()
             return dbBuilder.build()
+        }
+
+        fun getNavigationMenuData(): NavigationMenuData {
+            return NavigationMenuData(
+                data = hashMapOf(
+                    Category.GENERIC to listOf(
+                        Tool.TLV_PARSER,
+                        Tool.DES,
+                        Tool.HASH,
+                        Tool.BITWISE,
+                        Tool.MAC,
+                        Tool.CONVERTER,
+                        Tool.RSA,
+                    ),
+                    Category.EMV to listOf(
+                        Tool.CARD_SIMULATOR,
+                        Tool.EMV_KERNEL,
+                        Tool.ARQC,
+                        Tool.ODA,
+                        Tool.PIN_BLOCK
+                    ),
+                    Category.ACQUIRER to listOf(
+                        Tool.HOST
+                    )
+                )
+            )
         }
     }
 
@@ -43,7 +72,7 @@ class MainApplication : Application(), ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         Log.d(LIFECYCLE, "${activity.javaClass.simpleName} onCreated")
-        if (!activitiesAlive.contains(activity.javaClass.name)){
+        if (!activitiesAlive.contains(activity.javaClass.name)) {
             activitiesAlive.add(activity.javaClass.name)
             Log.d(LIFECYCLE, activitiesAlive.toString())
         }

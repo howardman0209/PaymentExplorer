@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Mobile Gateway</string>
+    <string name="label_app_version_no" translatable="false">v0.1</string>
 
     <!--    common-->
     <string name="label_login">Login</string>
@@ -744,4 +745,24 @@
     <string name="label_start" translatable="false">Start</string>
     <string name="label_stop" translatable="false">Stop</string>
     <string name="label_proxy" translatable="false">Proxy</string>
+
+    <string name="label_tool_unknown" translatable="false">UNKNOWN</string>
+    <string name="label_tool_des" translatable="false">DES</string>
+    <string name="label_tool_rsa" translatable="false">RSA</string>
+    <string name="label_tool_aes" translatable="false">AES</string>
+    <string name="label_tool_mac" translatable="false">MAC</string>
+    <string name="label_tool_hash" translatable="false">Hash</string>
+    <string name="label_tool_bitwise" translatable="false">Bitwise</string>
+    <string name="label_tool_converter" translatable="false">Converter</string>
+    <string name="label_tool_tlv_parser" translatable="false">TLV Parser</string>
+    <string name="label_tool_card_simulator" translatable="false">Card Simulator</string>
+    <string name="label_tool_emv_kernel" translatable="false">EMV Kernel</string>
+    <string name="label_tool_arqc" translatable="false">ARQC</string>
+    <string name="label_tool_oda" translatable="false">ODA</string>
+    <string name="label_tool_pin_block" translatable="false">PIN Block</string>
+    <string name="label_tool_host" translatable="false">Host</string>
+
+    <string name="label_category_generic" translatable="false">Generic</string>
+    <string name="label_category_emv" translatable="false">EMV</string>
+    <string name="label_category_acquirer" translatable="false">Acquirer</string>
 </resources>

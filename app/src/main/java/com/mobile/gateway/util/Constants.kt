@@ -41,6 +41,7 @@ const val prefLogFontSize = "prefLogFontSize"
 const val prefISO8583ResponseConfig = "prefISO8583ResponseConfig"
 const val prefISO8583ServerProfile = "prefISO8583ServerProfile"
 const val prefDefaultPortNo = "prefDefaultPortNo"
+const val prefLastUsedTool = "prefLastUsedTool"
 
 //APDU command response code
 const val APDU_RESPONSE_CODE_OK = "9000"

@@ -14,41 +14,78 @@
             type="com.mobile.gateway.ui.viewModel.MainViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                android:elevation="0dp"
-                app:navigationIcon="@drawable/ic_baseline_menu"
-                app:title="@{viewModel.title}" />
-        </com.google.android.material.appbar.AppBarLayout>
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    android:elevation="0dp"
+                    app:navigationIcon="@drawable/ic_baseline_menu"
+                    app:title="@{viewModel.title}" />
+            </com.google.android.material.appbar.AppBarLayout>
 
 
-        <FrameLayout
-            android:id="@+id/debugPanel"
-            showIf="@{viewModel.debugPanelOn}"
-            android:layout_width="match_parent"
+            <FrameLayout
+                android:id="@+id/debugPanel"
+                showIf="@{viewModel.debugPanelOn}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:translationZ="1dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:background="@color/terminal_black" />
+
+            <FrameLayout
+                android:id="@+id/mainContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:translationZ="0dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:translationZ="1dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:background="@color/terminal_black" />
+            android:layout_gravity="start"
+            tools:visibility="visible">
+            <!--            app:headerLayout="@layout/nav_header"-->
+            <!--            app:menu="@menu/nav_menu"-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/so_white"
+                android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/mainContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:translationZ="0dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                <include
+                    layout="@layout/nav_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <ExpandableListView
+                    android:id="@+id/expandableMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="8"
+                    android:background="@color/so_white_variant"
+                    android:nestedScrollingEnabled="true" />
+            </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

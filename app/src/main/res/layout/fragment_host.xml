@@ -9,11 +9,11 @@
 
         <variable
             name="view"
-            type="com.mobile.gateway.ui.view.fragment.HomeFragment" />
+            type="com.mobile.gateway.ui.view.fragment.HostFragment" />
 
         <variable
             name="viewModel"
-            type="com.mobile.gateway.ui.viewModel.HomeViewModel" />
+            type="com.mobile.gateway.ui.viewModel.HostViewModel" />
 
     </data>
 
