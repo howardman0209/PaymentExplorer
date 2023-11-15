@@ -62,10 +62,11 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
 
         DebugPanelManager.show(isDebug)
 
+        setAppbarTitle()
         setUpMainContainer()
     }
 
-    private fun setAppbarTitle(tool: Tool = Tool.TLV_PARSER) {
+    private fun setAppbarTitle(tool: Tool = PreferencesUtil.getLastUsedTool(applicationContext)) {
         val title = getString(tool.resourceId)
         viewModel.title.set(title)
     }
