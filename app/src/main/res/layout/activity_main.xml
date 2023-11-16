@@ -7,11 +7,11 @@
 
         <variable
             name="view"
-            type="com.mobile.gateway.ui.view.activity.MainActivity" />
+            type="com.payment.explorer.ui.view.activity.MainActivity" />
 
         <variable
             name="viewModel"
-            type="com.mobile.gateway.ui.viewModel.MainViewModel" />
+            type="com.payment.explorer.ui.viewModel.MainViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

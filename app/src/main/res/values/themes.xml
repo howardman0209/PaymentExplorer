@@ -3,10 +3,10 @@
 
     <!--theme attributes, see https://www.youtube.com/watch?v=Owkf8DhAOSo-->
     <!--top-level theme-->
-    <style name="Theme.mobile.gateway.DayNight" parent="Base.V24.Theme.mobile.gateway" />
+    <style name="Theme.payment.explorer.DayNight" parent="Base.V24.Theme.payment.explorer" />
 
     <!--light mode theme-->
-    <style name="Base.V24.Theme.mobile.gateway" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.V24.Theme.payment.explorer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!--System/Platform attributes-->
         <item name="android:windowLightStatusBar">true</item>
@@ -66,27 +66,27 @@
         <!--<item name="colorControlHighlight">?colorOnSurfaceFaded</item>-->
 
         <!--Material type attributes-->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.mobile.gateway.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.mobile.gateway.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.mobile.gateway.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.mobile.gateway.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.mobile.gateway.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.mobile.gateway.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.mobile.gateway.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.mobile.gateway.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.mobile.gateway.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.mobile.gateway.Body2</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.mobile.gateway.Caption</item>
-        <item name="textAppearanceTerms">@style/TextAppearance.mobile.gateway.Terms</item>
-        <item name="textAppearanceButton">@style/TextAppearance.mobile.gateway.Button</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.mobile.gateway.Overline</item>
-        <item name="textAppearanceTextButton">@style/TextAppearance.mobile.gateway.TextButton</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.payment.explorer.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.payment.explorer.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.payment.explorer.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.payment.explorer.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.payment.explorer.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.payment.explorer.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.payment.explorer.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.payment.explorer.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.payment.explorer.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.payment.explorer.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.payment.explorer.Caption</item>
+        <item name="textAppearanceTerms">@style/TextAppearance.payment.explorer.Terms</item>
+        <item name="textAppearanceButton">@style/TextAppearance.payment.explorer.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.payment.explorer.Overline</item>
+        <item name="textAppearanceTextButton">@style/TextAppearance.payment.explorer.TextButton</item>
         <item name="android:includeFontPadding">false</item>
 
         <!--Material shape attributes-->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.mobile.gateway.Small.Rounded</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.mobile.gateway.Medium</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.mobile.gateway.Medium</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.payment.explorer.Small.Rounded</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.payment.explorer.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.payment.explorer.Medium</item>
 
         <!--Color alpha-->
         <item name="alphaEmphasisHigh">0.92</item>
@@ -97,55 +97,55 @@
         <!--Override the actual material component/ view class-->
 
         <!--Bottom sheet-->
-        <!--<item name="bottomSheetDialogTheme">@style/ThemeOverlay.mobile.gateway.BottomSheetDialog</item>-->
+        <!--<item name="bottomSheetDialogTheme">@style/ThemeOverlay.payment.explorer.BottomSheetDialog</item>-->
 
         <!--Toolbar style, top app bar-->
-        <item name="appBarLayoutStyle">@style/Widget.mobile.gateway.AppBarLayout</item>
-        <item name="toolbarStyle">@style/Widget.mobile.gateway.Toolbar</item>
-        <item name="actionBarTheme">@style/Widget.mobile.gateway.Toolbar</item>
-        <item name="actionOverflowButtonStyle">@style/Widget.mobile.gateway.ActionButton.Overflow</item>
-        <item name="toolbarNavigationButtonStyle">@style/Widget.mobile.gateway.Toolbar.Button.Navigation</item>
+        <item name="appBarLayoutStyle">@style/Widget.payment.explorer.AppBarLayout</item>
+        <item name="toolbarStyle">@style/Widget.payment.explorer.Toolbar</item>
+        <item name="actionBarTheme">@style/Widget.payment.explorer.Toolbar</item>
+        <item name="actionOverflowButtonStyle">@style/Widget.payment.explorer.ActionButton.Overflow</item>
+        <item name="toolbarNavigationButtonStyle">@style/Widget.payment.explorer.Toolbar.Button.Navigation</item>
 
-        <item name="tooltipStyle">@style/Widget.mobile.gateway.Tooltip</item>
+        <item name="tooltipStyle">@style/Widget.payment.explorer.Tooltip</item>
 
         <!--Bottom navigation-->
-        <item name="bottomNavigationStyle">@style/Widget.mobile.gateway.BottomNavigationView</item>
+        <item name="bottomNavigationStyle">@style/Widget.payment.explorer.BottomNavigationView</item>
 
         <!--Tab layout-->
-        <item name="tabStyle">@style/Widget.mobile.gateway.TabLayout</item>
+        <item name="tabStyle">@style/Widget.payment.explorer.TabLayout</item>
 
         <!--Button style-->
-        <item name="materialButtonStyle">@style/Widget.mobile.gateway.Button.Flat</item>
-        <item name="materialButtonOutlinedStyle">@style/Widget.mobile.gateway.Button.Outlined</item>
-        <item name="borderlessButtonStyle">@style/Widget.mobile.gateway.Button.TextButton</item>
+        <item name="materialButtonStyle">@style/Widget.payment.explorer.Button.Flat</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.payment.explorer.Button.Outlined</item>
+        <item name="borderlessButtonStyle">@style/Widget.payment.explorer.Button.TextButton</item>
 
         <!--FAB style-->
-        <item name="floatingActionButtonStyle">@style/Widget.mobile.gateway.FloatingActionButton</item>
-        <item name="extendedFloatingActionButtonStyle">@style/Widget.mobile.gateway.ExtendedFloatingActionButton</item>
+        <item name="floatingActionButtonStyle">@style/Widget.payment.explorer.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.payment.explorer.ExtendedFloatingActionButton</item>
 
         <!--Snackbar style-->
-        <item name="snackbarStyle">@style/Widget.mobile.gateway.Snackbar</item>
-        <item name="snackbarButtonStyle">@style/Widget.mobile.gateway.SnackbarButton</item>
+        <item name="snackbarStyle">@style/Widget.payment.explorer.Snackbar</item>
+        <item name="snackbarButtonStyle">@style/Widget.payment.explorer.SnackbarButton</item>
 
         <!--Control style-->
-        <item name="checkboxStyle">@style/Widget.mobile.gateway.Checkbox</item>
-        <item name="radioButtonStyle">@style/Widget.mobile.gateway.RadioButton</item>
-        <item name="switchStyle">@style/Widget.mobile.gateway.Switch</item>
+        <item name="checkboxStyle">@style/Widget.payment.explorer.Checkbox</item>
+        <item name="radioButtonStyle">@style/Widget.payment.explorer.RadioButton</item>
+        <item name="switchStyle">@style/Widget.payment.explorer.Switch</item>
 
         <!--Text input style-->
-        <!--<item name="textInputStyle">@style/Widget.mobile.gateway.TextInputLayout</item>-->
-        <!--<item name="editTextStyle">@style/Widget.mobile.gateway.TextInputEditText</item>-->
-        <!--<item name="android:editTextStyle">@style/Widget.mobile.gateway.EditText</item>-->
+        <!--<item name="textInputStyle">@style/Widget.payment.explorer.TextInputLayout</item>-->
+        <!--<item name="editTextStyle">@style/Widget.payment.explorer.TextInputEditText</item>-->
+        <!--<item name="android:editTextStyle">@style/Widget.payment.explorer.EditText</item>-->
 
         <!--Card style-->
-        <!--<item name="materialCardViewStyle">@style/Widget.mobile.gateway.Card</item>-->
+        <!--<item name="materialCardViewStyle">@style/Widget.payment.explorer.Card</item>-->
 
         <!--Dialog style-->
-        <item name="alertDialogTheme">@style/ThemeOverlay.mobile.gateway.MaterialAlertDialog</item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.mobile.gateway.MaterialAlertDialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.payment.explorer.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.payment.explorer.MaterialAlertDialog</item>
 
         <!--Navigation drawer, but we don't use that much-->
-        <!--<item name="navigationViewStyle">@style/Widget.mobile.gateway.NavigationView</item>-->
+        <!--<item name="navigationViewStyle">@style/Widget.payment.explorer.NavigationView</item>-->
     </style>
 
     <!--Theme overlay-->
@@ -154,24 +154,24 @@
     <!--for dialog, it has no inheritance from the app theme-->
     <!--so we need to setup the themeoverlay, and set it in the material theme-->
     <!--Dialog style overlay-->
-    <style name="ThemeOverlay.mobile.gateway.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="ThemeOverlay.payment.explorer.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="windowNoTitle">true</item>
-        <item name="materialAlertDialogTitleTextStyle">@style/Widget.mobile.gateway.DialogTitle</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/Widget.payment.explorer.DialogTitle</item>
         <item name="materialAlertDialogBodyTextStyle">?textAppearanceBody1</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.mobile.gateway.DialogButton</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.mobile.gateway.DialogButton</item>
-        <item name="buttonBarNeutralButtonStyle">@style/Widget.mobile.gateway.DialogButton</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.payment.explorer.DialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.payment.explorer.DialogButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.payment.explorer.DialogButton</item>
         <item name="android:textColor">@color/neutral_emphasis_medium</item>
         <!--<item name="android:minWidth">312dp</item>-->
     </style>
 
-    <style name="Widget.mobile.gateway.DialogTitle" parent="TextAppearance.mobile.gateway.Headline5">
+    <style name="Widget.payment.explorer.DialogTitle" parent="TextAppearance.payment.explorer.Headline5">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/neutral_emphasis_high</item>
     </style>
 
-    <style name="Widget.mobile.gateway.DialogButton" parent="Widget.mobile.gateway.Button.TextButton">
+    <style name="Widget.payment.explorer.DialogButton" parent="Widget.payment.explorer.Button.TextButton">
         <item name="android:minHeight">@dimen/min_touch_area_dense</item>
         <item name="android:letterSpacing">0.02</item>
         <item name="android:insetTop">4dp</item>
@@ -181,16 +181,16 @@
     </style>
 
     <!--For full screen dialog (like config update or printing), need to set this theme in the manifests-->
-    <style name="Theme.mobile.gateway.DialogActivity" parent="Theme.MaterialComponents.DayNight.Dialog">
+    <style name="Theme.payment.explorer.DialogActivity" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="windowNoTitle">true</item>
-        <item name="android:theme">@style/Theme.mobile.gateway.DayNight</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.mobile.gateway.DialogButton</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.mobile.gateway.DialogButton</item>
-        <item name="buttonBarNeutralButtonStyle">@style/Widget.mobile.gateway.DialogButton</item>
+        <item name="android:theme">@style/Theme.payment.explorer.DayNight</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.payment.explorer.DialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.payment.explorer.DialogButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.payment.explorer.DialogButton</item>
     </style>
 
     <!--For DialogFragment, unused now-->
-    <!--    <style name="Theme.mobile.gateway.ProgressDialog" parent="Theme.mobile.gateway.DayNight">-->
+    <!--    <style name="Theme.payment.explorer.ProgressDialog" parent="Theme.payment.explorer.DayNight">-->
     <!--        <item name="android:windowNoTitle">true</item>-->
     <!--        <item name="android:windowActionBar">false</item>-->
     <!--        <item name="android:windowFullscreen">true</item>-->

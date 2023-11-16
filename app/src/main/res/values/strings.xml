@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Mobile Gateway</string>
+    <string name="app_name" translatable="false">Payment Explorer</string>
     <string name="label_app_version_no" translatable="false">v0.1</string>
 
     <!--    common-->

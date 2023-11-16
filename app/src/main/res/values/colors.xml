@@ -2,7 +2,7 @@
 <resources>
 
     <!--brand color-->
-    <!--mobile.gateway-->
+    <!--payment.explorer-->
     <!--! Try not to use it directly in code, both layout xml & kt !-->
     <!--! Use proxy object instead, like colorPrimary/ ColorStateList !-->
     <color name="theme_yellow_500">#FCD45B</color>

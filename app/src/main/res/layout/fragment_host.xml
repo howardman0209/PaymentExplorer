@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.mobile.gateway.server.ServerType" />
+        <import type="com.payment.explorer.server.ServerType" />
 
         <variable
             name="view"
-            type="com.mobile.gateway.ui.view.fragment.HostFragment" />
+            type="com.payment.explorer.ui.view.fragment.HostFragment" />
 
         <variable
             name="viewModel"
-            type="com.mobile.gateway.ui.viewModel.HostViewModel" />
+            type="com.payment.explorer.ui.viewModel.HostViewModel" />
 
     </data>
 
@@ -146,7 +146,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOnOff"
-            style="@style/Widget.mobile.gateway.Button.TextButton.Secondary"
+            style="@style/Widget.payment.explorer.Button.TextButton.Secondary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_default"

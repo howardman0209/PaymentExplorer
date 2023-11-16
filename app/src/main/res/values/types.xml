@@ -22,86 +22,86 @@
     <!--letterSpacing, etc. to define a custom appearance for each and see how they are -->
     <!--applied globally across your app.-->
 
-    <style name="TextAppearance.mobile.gateway" parent="" />
+    <style name="TextAppearance.payment.explorer" parent="" />
 
-    <style name="TextAppearance.mobile.gateway.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="TextAppearance.payment.explorer.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/inter_bold</item>
         <item name="android:letterSpacing">-0.0125</item>
         <item name="android:textSize">@dimen/font_size_h1</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+    <style name="TextAppearance.payment.explorer.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:letterSpacing">-0.0125</item>
         <item name="android:textSize">@dimen/font_size_h2</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="TextAppearance.payment.explorer.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="fontFamily">@font/inter_bold</item>
         <item name="android:letterSpacing">0</item>
         <item name="android:textSize">@dimen/font_size_h3</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+    <style name="TextAppearance.payment.explorer.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_h4</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextAppearance.payment.explorer.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_h5</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.payment.explorer.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_h6</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Subtitle1">
+    <style name="TextAppearance.payment.explorer.Subtitle1">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_l</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Subtitle2">
+    <style name="TextAppearance.payment.explorer.Subtitle2">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_m</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Body1">
+    <style name="TextAppearance.payment.explorer.Body1">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_l</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Body2">
+    <style name="TextAppearance.payment.explorer.Body2">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_size_body_m</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Caption">
+    <style name="TextAppearance.payment.explorer.Caption">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:letterSpacing">0.015</item>
         <item name="android:textSize">@dimen/font_size_body_s</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Terms">
+    <style name="TextAppearance.payment.explorer.Terms">
         <item name="fontFamily">@font/inter_medium</item>
         <item name="android:letterSpacing">0.015</item>
         <item name="android:textSize">@dimen/font_size_body_xs</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Overline">
+    <style name="TextAppearance.payment.explorer.Overline">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_body_s</item>
         <item name="android:letterSpacing">0.125</item>
@@ -109,14 +109,14 @@
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.Button">
+    <style name="TextAppearance.payment.explorer.Button">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_body_l</item>
         <item name="android:letterSpacing">0.0075</item>
         <item name="android:fontFeatureSettings">ss01,ss04</item>
     </style>
 
-    <style name="TextAppearance.mobile.gateway.TextButton">
+    <style name="TextAppearance.payment.explorer.TextButton">
         <item name="fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/font_size_body_m</item>
         <item name="android:letterSpacing">0.015</item>

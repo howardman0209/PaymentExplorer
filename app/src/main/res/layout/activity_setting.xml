@@ -7,11 +7,11 @@
 
         <variable
             name="view"
-            type="com.mobile.gateway.ui.view.activity.SettingActivity" />
+            type="com.payment.explorer.ui.view.activity.SettingActivity" />
 
         <variable
             name="viewModel"
-            type="com.mobile.gateway.ui.viewModel.SettingViewModel" />
+            type="com.payment.explorer.ui.viewModel.SettingViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/settingFont"
-                style="@style/Widget.mobile.gateway.List.SingleLineItem"
+                style="@style/Widget.payment.explorer.List.SingleLineItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/label_setting_log_font_size"
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/settingDefaultPort"
-                style="@style/Widget.mobile.gateway.List.SingleLineItem"
+                style="@style/Widget.payment.explorer.List.SingleLineItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/label_setting_default_port"
