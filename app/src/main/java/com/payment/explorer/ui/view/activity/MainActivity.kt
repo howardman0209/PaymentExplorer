@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.payment.explorer.MainApplication
@@ -26,6 +28,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
     private lateinit var menuAdapter: ExpandableMenuAdapter
     private var navigationMenuData: NavigationMenuData = MainApplication.getNavigationMenuData()
     private var isDebug = true
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
         setUpDebugPanel()
 
         binding.topAppBar.setNavigationOnClickListener {
+            Log.d("MainActivity", "topAppBar On Click")
             binding.drawerLayout.open()
         }
 
@@ -55,6 +59,18 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
             false
         }
 
+        binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+
+            override fun onDrawerOpened(drawerView: View) {}
+
+            override fun onDrawerClosed(drawerView: View) {
+                currentFragment?.let { pushFragment(it, R.id.mainContainer) }
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {}
+        })
+
         DebugPanelManager.display.observe(this) {
             it.getContentIfNotHandled()?.let { visibility ->
                 viewModel.debugPanelOn.set(visibility)
@@ -65,6 +81,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
 
         setAppbarTitle()
         setUpMainContainer()
+        currentFragment?.let { pushFragment(it, R.id.mainContainer) }
     }
 
     private fun setAppbarTitle(tool: Tool = PreferencesUtil.getLastUsedTool(applicationContext)) {
@@ -91,15 +108,10 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
         }
 
         binding.drawerLayout.close()
-        val fragment: Fragment? = when (tool ?: PreferencesUtil.getLastUsedTool(applicationContext)) {
+        currentFragment = when (tool ?: PreferencesUtil.getLastUsedTool(applicationContext)) {
             Tool.HOST -> HostFragment()
             Tool.CARD_SIMULATOR -> CardSimulatorFragment()
             else -> null
-        }
-        fragment?.also {
-            binding.drawerLayout.post {
-                pushFragment(it, R.id.mainContainer, isAddToBackStack = false)
-            }
         }
     }
 
