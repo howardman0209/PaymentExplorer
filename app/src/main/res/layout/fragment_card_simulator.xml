@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <variable
@@ -12,9 +13,79 @@
             name="viewModel"
             type="com.payment.explorer.ui.viewModel.CardSimulatorViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tvPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_default"
+            android:text="@{viewModel.promptMessage}"
+            android:textAlignment="center"
+            android:textAppearance="?textAppearanceHeadline3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/emv_label_tap" />
+
+        <LinearLayout
+            android:id="@+id/cardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrompt">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPaymentMethod"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/item_preview_card_size"
+                android:layout_weight="1"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/acceptance_paymentmethod_visa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCard"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/item_preview_card_size"
+                android:layout_weight="1"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_credit_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/inspectModeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:text="@string/label_inspect_moder"
+            android:textAppearance="?textAppearanceSubtitle1"
+            app:layout_constraintBottom_toBottomOf="@+id/ivSetting"
+            app:layout_constraintEnd_toStartOf="@+id/ivSetting"
+            app:layout_constraintTop_toTopOf="@+id/ivSetting"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/space_default"
+            android:src="@drawable/ic_baseline_settings"
+            android:tint="@color/secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardContainer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

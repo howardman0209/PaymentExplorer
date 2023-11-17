@@ -14,6 +14,7 @@ import com.payment.explorer.model.NavigationMenuData
 import com.payment.explorer.model.Tool
 import com.payment.explorer.model.getGroupList
 import com.payment.explorer.ui.base.MVVMActivity
+import com.payment.explorer.ui.view.fragment.CardSimulatorFragment
 import com.payment.explorer.ui.view.fragment.DebugPanelFragment
 import com.payment.explorer.ui.view.fragment.HostFragment
 import com.payment.explorer.ui.view.viewAdapter.ExpandableMenuAdapter
@@ -89,12 +90,16 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
             }
         }
 
+        binding.drawerLayout.close()
         val fragment: Fragment? = when (tool ?: PreferencesUtil.getLastUsedTool(applicationContext)) {
             Tool.HOST -> HostFragment()
+            Tool.CARD_SIMULATOR -> CardSimulatorFragment()
             else -> null
         }
         fragment?.also {
-            pushFragment(it, R.id.mainContainer, isAddToBackStack = false)
+            binding.drawerLayout.post {
+                pushFragment(it, R.id.mainContainer, isAddToBackStack = false)
+            }
         }
     }
 

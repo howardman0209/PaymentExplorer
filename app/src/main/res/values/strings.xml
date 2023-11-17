@@ -765,4 +765,7 @@
     <string name="label_category_generic" translatable="false">Generic</string>
     <string name="label_category_emv" translatable="false">EMV</string>
     <string name="label_category_acquirer" translatable="false">Acquirer</string>
+
+    <!-- Card Simulation  -->
+    <string name="label_inspect_moder" translatable="false">Inspect mode</string>
 </resources>
