@@ -768,4 +768,9 @@
 
     <!-- Card Simulation  -->
     <string name="label_inspect_moder" translatable="false">Inspect mode</string>
+    <string name="label_prompt_present_card" translatable="false">Present card to reader</string>
+
+    <!-- EMV kernel  -->
+    <string name="label_auth_amount" translatable="false">Authorised amount</string>
+    <string name="label_cashback_amount" translatable="false">Cashback amount</string>
 </resources>

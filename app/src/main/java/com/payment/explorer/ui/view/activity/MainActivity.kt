@@ -18,6 +18,7 @@ import com.payment.explorer.model.getGroupList
 import com.payment.explorer.ui.base.MVVMActivity
 import com.payment.explorer.ui.view.fragment.CardSimulatorFragment
 import com.payment.explorer.ui.view.fragment.DebugPanelFragment
+import com.payment.explorer.ui.view.fragment.EmvKernelFragment
 import com.payment.explorer.ui.view.fragment.HostFragment
 import com.payment.explorer.ui.view.viewAdapter.ExpandableMenuAdapter
 import com.payment.explorer.ui.viewModel.MainViewModel
@@ -110,6 +111,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
         binding.drawerLayout.close()
         currentFragment = when (tool ?: PreferencesUtil.getLastUsedTool(applicationContext)) {
             Tool.HOST -> HostFragment()
+            Tool.EMV_KERNEL -> EmvKernelFragment()
             Tool.CARD_SIMULATOR -> CardSimulatorFragment()
             else -> null
         }

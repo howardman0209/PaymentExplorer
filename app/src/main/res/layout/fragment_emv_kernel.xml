@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.payment.explorer.ui.view.fragment.EmvKernelFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.payment.explorer.ui.viewModel.EmvKernelViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_default"
+            android:text="@{viewModel.promptMessage}"
+            android:textAlignment="center"
+            android:textAppearance="?textAppearanceHeadline3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/emv_label_tap" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAuthAmount"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:hint="@string/label_auth_amount"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrompt">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAuthAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCashBackAmount"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:hint="@string/label_cashback_amount"
+            app:layout_constraintTop_toBottomOf="@+id/tilAuthAmount">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCashBackAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/inspectModeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:text="@string/label_inspect_moder"
+            android:textAppearance="?textAppearanceSubtitle1"
+            app:layout_constraintBottom_toBottomOf="@+id/ivSetting"
+            app:layout_constraintEnd_toStartOf="@+id/ivSetting"
+            app:layout_constraintTop_toTopOf="@+id/ivSetting"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/space_default"
+            android:src="@drawable/ic_baseline_settings"
+            android:tint="@color/secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCashBackAmount" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/space_default"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/space_default"
+            app:layout_constraintTop_toBottomOf="@+id/inspectModeCheckBox">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/operationBtn1"
+                style="@style/Widget.payment.explorer.Button.TextButton.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_default"
+                android:layout_weight="1"
+                android:text="@string/label_start" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/operationBtn2"
+                style="@style/Widget.payment.explorer.Button.TextButton.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_default"
+                android:layout_weight="1"
+                android:text="@string/label_abort" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

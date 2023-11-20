@@ -23,11 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/space_default"
-            android:text="@{viewModel.promptMessage}"
+            android:text="@string/label_prompt_present_card"
             android:textAlignment="center"
             android:textAppearance="?textAppearanceHeadline3"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/emv_label_tap" />
+            tools:text="@string/label_prompt_present_card" />
 
         <LinearLayout
             android:id="@+id/cardContainer"
