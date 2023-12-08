@@ -132,9 +132,11 @@ class ISO8583Server(context: Context, private var serverConfig: ISO8583ServerCon
                     Regex(it.value).matches(isoReq.mti)
                 } else {
                     val fieldNo = it.key.drop(2).toInt() //"DE22" -> 22
-                    val value = isoReq.getBytes(fieldNo).toHexString().hexToAscii()
-                    Log.d("ISO8583Reply", "check {${it.key}, ${it.value}}  [$fieldNo]=$value")
-                    Regex(it.value).matches(isoReq.getBytes(fieldNo).toHexString().hexToAscii())
+                    if (isoReq.hasField(fieldNo)) {
+                        val value = isoReq.getBytes(fieldNo).toHexString().hexToAscii()
+                        Log.d("ISO8583Reply", "check {${it.key}, ${it.value}}  [$fieldNo]=$value")
+                        Regex(it.value).matches(value)
+                    } else false
                 }
             } == true
         }
