@@ -29,7 +29,6 @@ import com.payment.explorer.R
 import com.payment.explorer.databinding.DialogContentEditConfigJsonBinding
 import com.payment.explorer.databinding.DialogContentSingleInputBinding
 import com.payment.explorer.extension.flatten
-import com.payment.explorer.extension.hideKeyboard
 import com.payment.explorer.extension.requireManageFilePermission
 import com.payment.explorer.extension.toSerializedMap
 import com.payment.explorer.model.PermissionRequest
