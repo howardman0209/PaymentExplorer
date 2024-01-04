@@ -34,12 +34,16 @@ class EmvKernelFragment : MVVMFragment<EmvKernelViewModel, FragmentEmvKernelBind
         })
 
         binding.startBtn.setOnClickListener {
-            cardReader.initTransaction("100", "")
+            val authorizedAmount = viewModel.authAmount.get().let { if (!it.isNullOrEmpty()) it else "100" }.padStart(12, '0')
+            val cashbackAmount = (viewModel.cashbackAmount.get() ?: "00").padStart(12, '0')
+            viewModel.authAmount.set(authorizedAmount)
+            viewModel.cashbackAmount.set(cashbackAmount)
+            cardReader.initTransaction(authorizedAmount, cashbackAmount)
             cardReader.enableReader()
         }
 
         binding.abortBtn.setOnClickListener {
-            cardReader.disableReader()
+            cardReader.disableReader(true)
         }
     }
 

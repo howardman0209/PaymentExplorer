@@ -7,5 +7,5 @@ abstract class BasicCardReader(val context: Context, val handler: CardReaderCall
     abstract fun prepareNfcDetector()
     abstract fun initTransaction(authorizedAmount: String?, cashbackAmount: String?)
     abstract fun enableReader()
-    abstract fun disableReader()
+    abstract fun disableReader(manualAbort: Boolean = false)
 }

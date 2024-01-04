@@ -36,14 +36,17 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_default"
             android:layout_marginTop="@dimen/space_default"
-            android:hint="@string/label_auth_amount"
+            android:hint="@{@string/label_hint_auth_amount(viewModel.authAmount.length,12)}"
             app:layout_constraintTop_toBottomOf="@+id/tvPrompt">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etAuthAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="12"
+                android:text="@={viewModel.authAmount}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,14 +56,17 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_default"
             android:layout_marginTop="@dimen/space_default"
-            android:hint="@string/label_cashback_amount"
+            android:hint="@{@string/label_hint_cashback_amount(viewModel.cashbackAmount.length,12)}"
             app:layout_constraintTop_toBottomOf="@+id/tilAuthAmount">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCashBackAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="12"
+                android:text="@={viewModel.cashbackAmount}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatCheckBox

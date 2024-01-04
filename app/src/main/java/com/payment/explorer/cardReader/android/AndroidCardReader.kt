@@ -16,8 +16,6 @@ import com.payment.explorer.util.DATE_TIME_PATTERN_EMV_9F21
 import com.payment.explorer.util.PreferencesUtil
 import com.payment.explorer.util.UUidUtil
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
@@ -93,7 +91,8 @@ class AndroidCardReader(private val activity: Activity, handler: CardReaderCallb
         handler.updateReaderStatus(CardReaderStatus.READY)
     }
 
-    override fun disableReader() {
+    override fun disableReader(manualAbort: Boolean) {
+        if (manualAbort) handler.updateReaderStatus(CardReaderStatus.ABORT)
         if (!activity.isDestroyed) {
             nfcAdapter?.disableReaderMode(activity)
         }

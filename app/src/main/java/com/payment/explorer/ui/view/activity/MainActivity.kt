@@ -56,6 +56,7 @@ class MainActivity : MVVMActivity<MainViewModel, ActivityMainBinding>() {
                 Log.d("expandableMenu", "Selected group: $selectedGroup, selected tool: $selectedTool")
                 setAppbarTitle(selectedTool)
                 setUpMainContainer(selectedTool)
+                PreferencesUtil.saveLastUsedTool(applicationContext, selectedTool)
             }
             false
         }
