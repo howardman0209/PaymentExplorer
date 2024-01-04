@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.payment.explorer.MainApplication
 import com.payment.explorer.model.PendingLog
-import com.payment.explorer.util.roomDbNameMobileGatewayDb
+import com.payment.explorer.util.roomDbNamePaymentExplorerDb
 
 class PendingLogRepository private constructor(private val database: PendingLogDatabase) {
     companion object {
@@ -13,7 +13,7 @@ class PendingLogRepository private constructor(private val database: PendingLogD
         private var pendingLogRepository: PendingLogRepository? = null
         fun getInstance(context: Context): PendingLogRepository {
             if (pendingLogRepository == null) {
-                pendingLogRepository = PendingLogRepository(MainApplication.getDatabase(context, roomDbNameMobileGatewayDb))
+                pendingLogRepository = PendingLogRepository(MainApplication.getDatabase(context, roomDbNamePaymentExplorerDb))
             }
 
             return pendingLogRepository!!

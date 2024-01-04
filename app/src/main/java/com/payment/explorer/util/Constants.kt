@@ -51,5 +51,12 @@ const val assetPathDefaultISO8385ResponseConfig = "iso8583/profile_vm/genericApp
 const val assetPathDefaultISO8385ServerProfile = "iso8583/serverProfile.json"
 
 //room db table name
-const val roomDbNameMobileGatewayDb = "mobileGateway_db_v1"
+const val roomDbNamePaymentExplorerDb = "paymentExplorer_db_v1"
 const val roomDbTableNamePendingLog = "roomDbTableNamePendingLog"
+
+
+const val APDU_COMMAND_1PAY_SYS_DDF01 = "00A404000E315041592E5359532E444446303100"
+const val APDU_COMMAND_2PAY_SYS_DDF01 = "00A404000E325041592E5359532E444446303100"
+
+const val APDU_COMMAND_GPO_WITHOUT_PDOL = "80A8000002830000"
+const val APDU_COMMAND_GET_CHALLENGE = "0084000000"

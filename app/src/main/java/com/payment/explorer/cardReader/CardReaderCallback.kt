@@ -6,5 +6,5 @@ import com.payment.explorer.cardReader.model.CardReaderStatus
 interface CardReaderCallback {
     fun updateReaderStatus(status: CardReaderStatus)
     fun onApduExchange(apdu: APDU)
-    fun onTransactionOnline(iccData: Map<String, String>)
+    fun onTransactionOnline(tlv: String)
 }
