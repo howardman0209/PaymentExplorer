@@ -101,7 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/inspectModeCheckBox">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/operationBtn1"
+                android:id="@+id/startBtn"
                 style="@style/Widget.payment.explorer.Button.TextButton.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:text="@string/label_start" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/operationBtn2"
+                android:id="@+id/abortBtn"
                 style="@style/Widget.payment.explorer.Button.TextButton.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

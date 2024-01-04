@@ -5,6 +5,7 @@ import android.content.Context
 abstract class BasicCardReader(val context: Context, val handler: CardReaderCallback) {
     abstract fun prepareEmvKernel()
     abstract fun prepareNfcDetector()
+    abstract fun initTransaction(authorizedAmount: String?, cashbackAmount: String?)
     abstract fun enableReader()
     abstract fun disableReader()
 }

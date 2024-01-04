@@ -11,6 +11,7 @@ import com.payment.explorer.cardReader.model.CardReaderStatus
 import com.payment.explorer.databinding.FragmentEmvKernelBinding
 import com.payment.explorer.ui.base.MVVMFragment
 import com.payment.explorer.ui.viewModel.EmvKernelViewModel
+import com.payment.explorer.util.DebugPanelManager
 
 class EmvKernelFragment : MVVMFragment<EmvKernelViewModel, FragmentEmvKernelBinding>() {
 
@@ -19,10 +20,12 @@ class EmvKernelFragment : MVVMFragment<EmvKernelViewModel, FragmentEmvKernelBind
         val cardReader = AndroidCardReader(requireActivity(), object : CardReaderCallback {
             override fun updateReaderStatus(status: CardReaderStatus) {
                 Log.d("updateReaderStatus", "CardReaderStatus: $status")
+                viewModel.promptMessage.set(status.name)
             }
 
             override fun onApduExchange(apdu: APDU) {
                 Log.d("onApduExchange", "APDU: $apdu")
+                DebugPanelManager.log(apdu.payload)
             }
 
             override fun onTransactionOnline(tlv: String) {
@@ -30,9 +33,14 @@ class EmvKernelFragment : MVVMFragment<EmvKernelViewModel, FragmentEmvKernelBind
             }
         })
 
-        cardReader.prepareEmvKernel()
-        cardReader.prepareNfcDetector()
-        cardReader.enableReader()
+        binding.startBtn.setOnClickListener {
+            cardReader.initTransaction("100", "")
+            cardReader.enableReader()
+        }
+
+        binding.abortBtn.setOnClickListener {
+            cardReader.disableReader()
+        }
     }
 
     override fun getViewModelInstance(): EmvKernelViewModel = EmvKernelViewModel()

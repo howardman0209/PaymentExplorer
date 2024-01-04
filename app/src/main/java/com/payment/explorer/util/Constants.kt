@@ -23,6 +23,9 @@ const val DATE_TIME_PATTERN_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 const val DATE_TIME_DISPLAY_PATTERN_LONG = "yyyy-MM-dd HH:mm:ss"
 const val DATE_TIME_PATTERN_UTC_DEFAULT = "yyyy-MM-dd'T'HH:mm:ssz"
 
+const val DATE_TIME_PATTERN_EMV_9A = "YYMMdd"
+const val DATE_TIME_PATTERN_EMV_9F21 = "HHmmSS"
+
 //time zone
 const val timeZone_HK = "GMT+8"
 
@@ -42,21 +45,29 @@ const val prefISO8583ResponseConfig = "prefISO8583ResponseConfig"
 const val prefISO8583ServerProfile = "prefISO8583ServerProfile"
 const val prefDefaultPortNo = "prefDefaultPortNo"
 const val prefLastUsedTool = "prefLastUsedTool"
+const val prefImkList = "prefImkList"
+const val prefCapkData = "prefCapkData"
+const val prefEmvConfig = "prefEmvConfig"
 
-//APDU command response code
-const val APDU_RESPONSE_CODE_OK = "9000"
 
 //default data asset path
 const val assetPathDefaultISO8385ResponseConfig = "iso8583/profile_vm/genericApprove.json"
 const val assetPathDefaultISO8385ServerProfile = "iso8583/serverProfile.json"
+const val assetsPathIssuerMasterKey = "emv/card/key/issuerMasterKeys.json"
+const val assetsPathTestCapk = "emv/general/testKey.capk"
+const val assetsPathTerminalEmvConfig = "emv/terminal/emvConfig.json"
 
 //room db table name
 const val roomDbNamePaymentExplorerDb = "paymentExplorer_db_v1"
 const val roomDbTableNamePendingLog = "roomDbTableNamePendingLog"
 
-
 const val APDU_COMMAND_1PAY_SYS_DDF01 = "00A404000E315041592E5359532E444446303100"
 const val APDU_COMMAND_2PAY_SYS_DDF01 = "00A404000E325041592E5359532E444446303100"
-
 const val APDU_COMMAND_GPO_WITHOUT_PDOL = "80A8000002830000"
 const val APDU_COMMAND_GET_CHALLENGE = "0084000000"
+
+//APDU command response code
+const val APDU_RESPONSE_CODE_OK = "9000"
+
+const val CVM_SIGNATURE_BINARY_CODE = "011110"
+const val CVM_NO_CVM_BINARY_CODE = "011111"

@@ -436,12 +436,12 @@
     <string name="label_permission_not_granted">未允許</string>
 
     <!--    <string name="label_card_agent" translatable="false">Card agent</string>-->
-    <!--    <string name="label_emv_config_loaded" translatable="false">Test config loaded</string>-->
-    <!--    <string name="label_emv_config_load_failed" translatable="false">Test config load failed</string>-->
+    <!--    <string name="label_emv_config_loaded" translatable="false">Test general loaded</string>-->
+    <!--    <string name="label_emv_config_load_failed" translatable="false">Test general load failed</string>-->
     <!--    <string name="label_capk_config_loaded" translatable="false">CAPK loaded</string>-->
     <!--    <string name="label_capk_config_load_failed" translatable="false">CAPK load failed</string>-->
     <!--    <string name="label_product_image" translatable="false">Product image</string>-->
-    <!--    <string name="label_select_emv_config" translatable="false">Select EMV config</string>-->
+    <!--    <string name="label_select_emv_config" translatable="false">Select EMV general</string>-->
 
     <string name="label_reactivate">重新啟用</string>
     <string name="label_confirm_update_emv_config">確定啟用?</string>

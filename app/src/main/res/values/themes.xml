@@ -180,7 +180,7 @@
         <item name="android:insetRight">4dp</item>
     </style>
 
-    <!--For full screen dialog (like config update or printing), need to set this theme in the manifests-->
+    <!--For full screen dialog (like general update or printing), need to set this theme in the manifests-->
     <style name="Theme.payment.explorer.DialogActivity" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="windowNoTitle">true</item>
         <item name="android:theme">@style/Theme.payment.explorer.DayNight</item>

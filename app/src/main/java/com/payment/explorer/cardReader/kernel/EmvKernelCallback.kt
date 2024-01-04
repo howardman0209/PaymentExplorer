@@ -1,4 +1,4 @@
-package com.payment.explorer.cardReader.emv
+package com.payment.explorer.cardReader.kernel
 
 import com.payment.explorer.cardReader.model.APDU
 

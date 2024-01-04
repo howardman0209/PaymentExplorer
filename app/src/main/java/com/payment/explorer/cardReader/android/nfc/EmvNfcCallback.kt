@@ -4,7 +4,7 @@ import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.IsoDep
 import android.util.Log
-import com.payment.explorer.cardReader.emv.EmvKernelProvider
+import com.payment.explorer.cardReader.kernel.EmvKernelProvider
 import com.payment.explorer.cardReader.model.APDU
 import com.payment.explorer.cardReader.model.APDUSource
 import com.payment.explorer.extension.sendAPDU

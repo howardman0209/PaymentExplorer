@@ -1,9 +1,9 @@
-package com.payment.explorer.cardReader.emv
+package com.payment.explorer.cardReader.kernel
 
 import com.payment.explorer.cardReader.model.APDU
 
 interface EmvKernelProvider {
-    fun loadEmvConfig(emvConfig: HashMap<String, String>)
+    fun loadTerminalData(terminalData: Map<String, String>)
     fun setApduExchangeBridge(bridge: (cAPDU: APDU) -> APDU)
     fun onTapEmvProcess()
     fun postTapEmvProcess()
