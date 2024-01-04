@@ -15,6 +15,7 @@ class EmvNfcCallback(private val emvKernel: EmvKernelProvider?) : NfcAdapter.Rea
 
         try {
             isoDep?.connect()
+            isoDep.timeout = 2000 // prevent slow card response
             Log.d("EmvNfcAdapterCallback", "isoDep: connected - $isoDep")
             emvKernel?.setApduExchangeBridge(
                 bridge = { APDU(payload = isoDep.sendAPDU(it.payload), source = APDUSource.CARD) }
