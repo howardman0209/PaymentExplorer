@@ -9,6 +9,7 @@ import com.payment.explorer.cardReader.android.AndroidCardReader
 import com.payment.explorer.cardReader.model.APDU
 import com.payment.explorer.cardReader.model.CardReaderStatus
 import com.payment.explorer.databinding.FragmentEmvKernelBinding
+import com.payment.explorer.inspector.EmvInspector
 import com.payment.explorer.ui.base.MVVMFragment
 import com.payment.explorer.ui.viewModel.EmvKernelViewModel
 import com.payment.explorer.util.DebugPanelManager
@@ -17,15 +18,51 @@ class EmvKernelFragment : MVVMFragment<EmvKernelViewModel, FragmentEmvKernelBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val inspector = EmvInspector(requireContext().applicationContext)
+        var onTapEmvStartTime = 0L
+        var postTapEmvStartTime = 0L
         val cardReader = AndroidCardReader(requireActivity(), object : CardReaderCallback {
             override fun updateReaderStatus(status: CardReaderStatus) {
                 Log.d("updateReaderStatus", "CardReaderStatus: $status")
                 viewModel.promptMessage.set(status.name)
+                when (status) {
+                    CardReaderStatus.ABORT -> {
+                        Log.d("EmvKernel", "ABORT")
+                        inspector.clearData()
+                    }
+
+                    CardReaderStatus.READY -> Log.d("EmvKernel", "READY")
+                    CardReaderStatus.PROCESSING -> {
+                        Log.d("EmvKernel", "PROCESSING")
+                        onTapEmvStartTime = System.currentTimeMillis()
+                    }
+
+                    CardReaderStatus.FAIL -> {
+                        Log.d("EmvKernel", "FAIL")
+                        inspector.clearData()
+                    }
+
+                    CardReaderStatus.CARD_READ_OK -> {
+                        postTapEmvStartTime = System.currentTimeMillis()
+                        val onTapEmvDuration = postTapEmvStartTime - onTapEmvStartTime
+                        Log.d("EmvKernel", "CARD_READ_OK - onTap: $onTapEmvDuration")
+                    }
+
+                    CardReaderStatus.SUCCESS -> {
+                        val postTapEmvDuration = System.currentTimeMillis() - postTapEmvStartTime
+                        Log.d("EmvKernel", "SUCCESS - postTap: $postTapEmvDuration")
+                        inspector.clearData()
+                    }
+                }
             }
 
             override fun onApduExchange(apdu: APDU) {
                 Log.d("onApduExchange", "APDU: $apdu")
-                DebugPanelManager.log(apdu.payload)
+                if (binding.inspectModeCheckBox.isChecked) {
+                    inspector.startInspect(apdu)
+                } else {
+                    DebugPanelManager.log(apdu.payload)
+                }
             }
 
             override fun onTransactionOnline(tlv: String) {
